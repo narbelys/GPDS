@@ -8,6 +8,7 @@ from users.models import Role
 class Methology(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField()
+    is_private = models.BooleanField(default=True)
     software_process = models.ForeignKey('SoftwareProcess')
     owner = models.ForeignKey(User, null=True, blank=True)
     

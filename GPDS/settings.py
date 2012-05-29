@@ -109,6 +109,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    'templates'
 )
 
 INSTALLED_APPS = (
@@ -128,6 +129,8 @@ INSTALLED_APPS = (
     'activity',
     
 )
+
+AUTH_PROFILE_MODULE='users.UserProfile'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -157,3 +160,6 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL='/users/login/'
+LOGIN_REDIRECT_URL='/'

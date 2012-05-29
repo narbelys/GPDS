@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
+from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
-from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,5 +13,10 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/',     include(admin.site.urls)),
+    url(r'^$', 'GPDS.views.home', name='home'),
+    url(r'^users/',     include('users.urls')),
+#    url(r'^methology/', include('methology.urls')),
+#    url(r'^project/',   include('project.urls')),
+#    url(r'^activity/',  include('activity.urls')),
 )
