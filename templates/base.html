@@ -48,13 +48,26 @@
             <nav class="box-shadow">
                 <div>
                     <ul class="menu">
-                        <li><a href="about.html">home</a>       </li>
+                        <li><a href="/">home</a>       </li>
                         <li><a href="services.html">Company</a> </li>
                         <li><a href="projects.html">Services</a></li>
-                        <li><a href="clients.html">Resources</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="clients.html">Documentacion</a></li>
+                        <li><a href="contacts.html">Contactos</a></li>
                     </ul>
-                    <div class="signin">¿Tienes una cuenta?   <a target="_blank" href="">Registrate</a>  o  <a target="_blank" href="">Login</a></div>
+                    <div class="signin">
+	                    {% if not user.is_authenticated  %}
+	                    		¿Tienes una cuenta?   
+	                    		<a href="/users/sign_up">Registrate</a>  
+	                    		o  
+	                    		<a href="/users/login/">Login</a>
+	                	{% else %}
+	                			Hola, <span class="white"> {{ user.username }}! </span> &nbsp;|&nbsp; 
+	                			<a href="/users/change/">Mi cuenta</a>  &nbsp;|&nbsp;
+	                			<a href="/users/password_change/">Cambiar contrasena</a>  &nbsp;|&nbsp;
+	                			<a href="/users/logout/">Logout</a>
+	                	{% endif %}
+                	</div>
+                
                 </div>
                 <div class="clear"></div>
                 <div class="navig">
@@ -70,19 +83,26 @@
             </nav>
             <!-- Imagenes que rotan -->
             <!-- Se puede colocar el contenido principal en esta parte -->
-     		<div class="slider">
-                <ul class="items">
-                    <li><img src="{% static "images/slider-1.jpg" %}" alt="" /><div class="banner">The Next Level of Your Success&nbsp;</div></li>
-                    <li><img src="{% static "images/slider-2.jpg" %}" alt="" /><div class="banner">We Offer Different Ways of Problem Solving&nbsp;</div></li>
-                    <li><img src="{% static "images/slider-3.jpg" %}" alt="" /><div class="banner">We Craft Practical Solutions&nbsp;</div></li>
-                </ul>
-            </div>	 
+            	</br></br></br></br>
+				{% if request.get_full_path == "/" %}
+            	
+	            	<div class="slider">
+		                <ul class="items">
+		                    <li><img src="{% static "images/a.jpg" %}" alt="" /><div class="banner">The Next Level of Your Success&nbsp;</div></li>
+		                    <li><img src="{% static "images/b.jpg" %}" alt="" /><div class="banner">We Offer Different Ways of Problem Solving&nbsp;</div></li>
+		                    <li><img src="{% static "images/c.jpg" %}" alt="" /><div class="banner">We Craft Practical Solutions&nbsp;</div></li>
+		                </ul>
+		            </div>
+		        {% endif %}
+	            </br></br></br></br>
   	                 
 		</header>
 	</div>
 	<div class="grey">
 		<div class="center">
-			<div class="one"><p class="text2"></div>
+			{% block content %}
+			
+			{% endblock %}
             <div class="linrr"></div>
 			<div class="linr"><br><img src="{% static "images/09.png" %}" alt="img"></div>
             <div class="clear"></div>

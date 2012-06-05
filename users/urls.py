@@ -3,7 +3,7 @@ from django.contrib.auth.views import login, logout, password_reset
 from django.contrib.auth.models import User
 
 urlpatterns = patterns('',
-                       
+    url(r'^sign_up/$', 'users.views.sign_up'),                   
     url(r'^login/$',  login, {'template_name':'login.html'}),
     url(r'^logout/$', logout, {'next_page':'/'}),
     url(r'^password_reset/$', password_reset, {'template_name': 'password_reset.html',

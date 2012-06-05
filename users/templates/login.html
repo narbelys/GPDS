@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<div class="conteiner">
+
 {% if form.errors %}
 
 <p>Your username and password didn’t match. Please try again.</p>
@@ -20,10 +22,13 @@
 	<td>{{ form.password }}</td>
 </tr>
 </table>
-
-<input type="submit" value="login" />
+<a href="/users/password_reset/" class="mylink">¿Olvidastes tu contrasena?</a>
+</br>
+<input type="submit" value="login" class="mybutton"/>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+</div>
 
 {% endblock %}
 	
