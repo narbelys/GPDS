@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.db import models
-from methology.models import SoftwareProcess
+from methodology.models import SoftwareProcess
 from project.models import Project
 from users.models import Role
 
