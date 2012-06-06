@@ -4,6 +4,10 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import Context, loader, RequestContext
+from users.forms import BasicUserChangeForm
+from django.core.context_processors import csrf
+from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required, login_required, permission_required
 
 def sign_up(request):
     if request.method == 'POST':
@@ -18,3 +22,19 @@ def sign_up(request):
     return render_to_response('sign_up.html',
                                     {'form': form}, 
                                     context_instance=RequestContext(request))
+
+@login_required
+def update(request):      
+    if request.method == 'POST':
+        form = BasicUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            redirect_to = request.REQUEST.get('next', reverse('home'))
+            return HttpResponseRedirect(redirect_to)
+    else:
+        form = BasicUserChangeForm(instance=request.user)
+    redirect_to = request.REQUEST.get('next','')
+    return render_to_response('update.html', 
+                              {'form':form,
+                               'next':redirect_to},
+                              context_instance=RequestContext(request))

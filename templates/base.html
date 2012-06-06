@@ -49,10 +49,13 @@
                 <div>
                     <ul class="menu">
                         <li><a href="/">home</a>       </li>
-                        <li><a href="services.html">Company</a> </li>
-                        <li><a href="projects.html">Services</a></li>
-                        <li><a href="clients.html">Documentacion</a></li>
-                        <li><a href="contacts.html">Contactos</a></li>
+                        <li><a href="">Proyectos</a> </li>
+                        <li><a href="">Actividades</a></li>
+                        <li><a href="documentation.html">Documentacion</a></li>
+                        <!-- <li><a href="contacts.html">Contactos</a></li> -->
+                        {% if user.is_staff %}
+                        	<li><a href="/admin/">Admin Site</a></li>
+                        {% endif %}
                     </ul>
                     <div class="signin">
 	                    {% if not user.is_authenticated  %}
@@ -62,7 +65,7 @@
 	                    		<a href="/users/login/">Login</a>
 	                	{% else %}
 	                			Hola, <span class="white"> {{ user.username }}! </span> &nbsp;|&nbsp; 
-	                			<a href="/users/change/">Mi cuenta</a>  &nbsp;|&nbsp;
+	                			<a href="/users/myaccount/">Mi cuenta</a>  &nbsp;|&nbsp;
 	                			<a href="/users/password_change/">Cambiar contrasena</a>  &nbsp;|&nbsp;
 	                			<a href="/users/logout/">Logout</a>
 	                	{% endif %}
@@ -73,10 +76,10 @@
                 <div class="navig">
                     <div class="logo">
                         <!-- <img src="images/logo.png" alt="img"> -->
-                        <p>Gestion de Proyectos <span class="green"> de Desarrollo de Software</span></p>
+                        <p onclick="window.location='/'">Gestion de Proyectos <span class="green"> de Desarrollo de Software</span></p>
                      </div>
                     <div class="search">
-                        <div class="supp"><a target="_blank" href="">Soporte</a>&nbsp;|&nbsp;<a target="_blank" href="">Ayuda</a></div>
+                        <div class="supp"><a href="support.html">Soporte</a>&nbsp;|&nbsp;<a href="help.html">Ayuda</a></div>
                         <div class="clear"></div>
                     </div>
                 </div> 
@@ -115,11 +118,11 @@
 				<div class="it"><p class="text11"></div> 
 				<div class="blackfoot">
 					<div class="footer">
-						<div class="about"><p class="text13">about</p>
+						<div class="about"><p class="text13">acerca</p>
 							<ul class="foot">
-                                <li><a target="_blank" href="">Company Info</a></li>
-                                <li><a target="_blank" href="">Clients</a>     </li>
-                                <li><a target="_blank" href="">Partners</a>    </li>
+                                <li><a target="_blank" href="">Version</a></li>
+                                <li><a target="_blank" href="">Autores</a> </li>
+                                <li><a target="_blank" href="">Licencia</a>    </li>
 							</ul></div>
 							<div class="join"><p class="text13">join in</p>
 								<ul class="foot">
@@ -157,7 +160,8 @@
                     	</div>
                 	</div>    
             	</div>       
-        	</div>                    
+        	</div> 
+        	</br></br></br></br>                  
 		</div>
 	</div>
 

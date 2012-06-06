@@ -4,16 +4,16 @@
 
 <div class="container">
 
-	<h1>{{ "Sign Up" }}</h1>
+	<h1>{{ "My information" }}</h1>
 	
 	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 	
-	<form action="." method="POST" >
+	<form action="/users/myaccount/{% if next %}?next={{ next }}{% endif %}" method="POST" >
 		{% csrf_token %}
 		<table>
 		{{ form.as_table }}
 		</table>
-		<input type="submit" value="Registrarse" />
+		<input type="submit" value="Update" />
 	</form>
 
 </div>
