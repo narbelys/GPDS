@@ -4,8 +4,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Descomentar al crear el index de actividades
-    #url(r'^$', activity.views.index'),
+    url(r'^$', 'activity.views.indexact'),
     # Technique Index
     url(r'^indextec/$', 'activity.views.indextec'),
     # Technique Details

@@ -7,11 +7,16 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
-from forms import import *
+from forms import *
 from models import *
 from django.shortcuts import render_to_response, get_object_or_404
 
-# Colocar def index aqui
+# Index de Actividad
+def indexact(request):
+    latest_act_list = Activity.objects.all()
+    t = loader.get_template('indexact.html')
+    c = Context({'latest_act_list': latest_act_list,})
+    return HttpResponse(t.render(c))
 
 # Technique Index
 def indextec(request):

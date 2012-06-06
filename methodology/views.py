@@ -36,9 +36,9 @@ def crear(request):
 def crearacc(request):
         ps = SoftwareProcess.objects.get(pk=request.POST['sw'])
         if request.POST['ip']=="1":
-            p = methodology(name=request.POST['name'],description=request.POST['descripcion'],software_process=ps, owner=request.user, is_private=True)
+            p = Methodology(name=request.POST['name'],description=request.POST['descripcion'],software_process=ps, owner=request.user, is_private=True)
         else:
-            p = methodology(name=request.POST['name'],description=request.POST['descripcion'],software_process=ps, owner=request.user, is_private=False)
+            p = Methodology(name=request.POST['name'],description=request.POST['descripcion'],software_process=ps, owner=request.user, is_private=False)
         p.save()
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
