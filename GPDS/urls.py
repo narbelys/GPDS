@@ -18,9 +18,9 @@ urlpatterns = patterns('',
     url(r'^admin/',     include(admin.site.urls)),
     url(r'^$', 'GPDS.views.home', name='home'),
     url(r'^users/',     include('users.urls')),
-#    url(r'^methodology/', include('methology.urls')),
-#    url(r'^project/',   include('project.urls')),
-#    url(r'^activity/',  include('activity.urls')),
+    url(r'^methodology/', include('methodology.urls')),
+    url(r'^project/',   include('project.urls')),
+    url(r'^activity/',  include('activity.urls')),
 )
 
 if settings.DEBUG:

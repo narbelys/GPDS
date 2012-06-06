@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if latest_tec_list %}
+    <ul>
+    <h1> Técnicas Disponibles </h1>
+    {% for technique in latest_tec_list %}
+        <li><a href="/activity/indextec/{{ technique.id }}/">{{ technique.name }} </a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h1> Ninguna Técnica Disponible </h1>
+{% endif %}
+
+{% endblock %}

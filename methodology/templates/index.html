@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if latest_meth_list %}
+    <ul>
+    <h1> Metodologías Disponibles </h1>
+    {% for methodology in latest_meth_list %}
+        <li><a href="/methodology/{{ methodology.id }}/">{{ methodology.name }}</a></li>
+    {% endfor %}
+     <a href="/methodology/create/">Crear Nueva</a>
+    </ul>
+{% else %}
+    <h1> Metodologías Disponibles </h1>
+    <a href="/methodology/create/">Crear Nueva</a>
+{% endif %}
+
+{% endblock %}
