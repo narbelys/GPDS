@@ -4,7 +4,6 @@ from django.db import models
 from methodology.models import SoftwareProcess
 from project.models import Project
 from users.models import Role
-
 # Create your models here.
 
 class Activity(models.Model):
