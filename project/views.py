@@ -1,3 +1,4 @@
+from django.template import Context, loader
 from project.models import Project 
 from activity.models import Activity
 from methodology.models import Methodology, SoftwareProcess
@@ -12,6 +13,7 @@ from django.contrib.auth.decorators import login_required, login_required, permi
 from users.models import UserProfile
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
+from project.form import ProjectChangeForm, ProjectDeleteForm
 
 @login_required
 def indexProject(request):
