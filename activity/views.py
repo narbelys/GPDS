@@ -14,16 +14,16 @@ from django.shortcuts import render_to_response, get_object_or_404
 # Index de Actividad
 def indexact(request):
     latest_act_list = Activity.objects.all()
-    t = loader.get_template('activity/indexact.html')
-    c = Context({'latest_act_list': latest_act_list, })
-    return HttpResponse(t.render(c))
+    return render_to_response('activity/indexact.html',
+                                    {'latest_act_list': latest_act_list,}, 
+                                    context_instance=RequestContext(request))
 
 # Technique Index
 def indextec(request):
     latest_tec_list = Technique.objects.all()
-    t = loader.get_template('activity/indextec.html')
-    c = Context({'latest_tec_list': latest_tec_list, })
-    return HttpResponse(t.render(c))
+    return render_to_response('activity/indextec.html',
+                                    {'latest_tec_list': latest_tec_list,}, 
+                                    context_instance=RequestContext(request))
 
 # Technique Details
 def detailtec(request, technique_id):
@@ -31,7 +31,8 @@ def detailtec(request, technique_id):
         p = Technique.objects.get(pk=technique_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('activity/detailtec.html', {'technique': p})
+    return render_to_response('activity/detailtec.html', {'technique': p},
+                                   context_instance=RequestContext(request))
 
 def addtec(request):      
     if request.method == 'POST':
@@ -65,7 +66,8 @@ def updatetec(request,technique_id):
 def artifacts(request, activity_id):
     p = get_object_or_404(Activity, pk=activity_id)
     artifacts = Artifact.objects.filter(activity__exact=p.id)
-    return render_to_response('activity/artifacts.html', {'artifacts': artifacts})
+    return render_to_response('activity/artifacts.html', {'artifacts': artifacts},
+                                     context_instance=RequestContext(request))
 
 def create_artifact(request, project_id):
     if request.method == 'GET':

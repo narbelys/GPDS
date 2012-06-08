@@ -19,11 +19,9 @@ from project.form import ProjectChangeForm, ProjectDeleteForm
 def indexProject(request):
     latest_project_list = Project.objects.all()
     latest_users_list = UserProfile.objects.all()
-    t = loader.get_template('project/indexProject.html')
-    c = Context({
-        'latest_project_list': latest_project_list, 'latest_users_list': latest_users_list,
-    })
-    return HttpResponse(t.render(c))
+    return render_to_response('project/indexProject.html',
+                                    {'latest_project_list': latest_project_list,}, 
+                                    context_instance=RequestContext(request))   
 
 @login_required
 def detailProject(request, project_id):
@@ -31,7 +29,8 @@ def detailProject(request, project_id):
         p = Project.objects.get(pk=project_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('project/detailProject.html', {'project': p})
+    return render_to_response('project/detailProject.html', {'project': p},
+                                   context_instance=RequestContext(request))
 
 @login_required
 def createProject(request):
@@ -48,13 +47,9 @@ def createProj(request):
        # l  = UserProfile.objects.get(pk=request.POST['leader'])
 #        usr = User.objects.get(pk=request.POST['participants'])
         p = Project    (name=request.POST['name'], description=request.POST['description'], date_start=request.POST['date_start'], date_end=request.POST['date_end'], cost=request.POST['cost'], area=request.POST['area'], methodology=mt, leader=request.user,)
-#participants=request.user)
-
         p.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
+        return render_to_response('project/indexProject.html', 
+                                   context_instance=RequestContext(request))
 
 @login_required
 def editProj(request, project_id):
