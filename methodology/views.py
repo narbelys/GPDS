@@ -11,11 +11,9 @@ from django.contrib.auth.decorators import login_required, login_required, permi
 @login_required
 def index(request):
     latest_meth_list = Methodology.objects.all()
-    t = loader.get_template('methodology/index.html')
-    c = Context({
-        'latest_meth_list': latest_meth_list,
-    })
-    return HttpResponse(t.render(c))
+    return render_to_response('methodology/index.html',
+                                    {'latest_meth_list': latest_meth_list,}, 
+                                    context_instance=RequestContext(request))
 
 @login_required
 def detail(request, methodology_id):
