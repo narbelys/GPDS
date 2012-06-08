@@ -79,6 +79,19 @@ def delete(request, methodology_id):
                                'methodology_id':methodology_id},
                               context_instance=RequestContext(request))
     
+#Consultar rol
+
+@login_required 
+def consultarRol(request, methodology_id):
+    return render_to_response('methodology/consultarRol.html')
+
+#Listar roles del participante
+
+@login_required 
+def ListarRol(request, methodology_id):
+    return render_to_response('methodology/ListarRol.html')
+    
+    
         
 # Software Process Index
 @login_required
