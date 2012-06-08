@@ -13,7 +13,12 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    #url(r'^activity/$', 'activity.views.index'),
+    url(r'^$', 'project.views.indexProject'),
+    url(r'^(?P<project_id>\d+)/$', 'project.views.detailProject'),
+    url(r'^createProject/$', 'project.views.createProject'),
+    url(r'^editProject(?P<project_id>\d+)/$', 'project.views.editProject'),
+    url(r'^createProj/$', 'project.views.createProj'),
+    url(r'^editProj/$', 'project.views.editProj'),
     url(r'^(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
 
 )

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+<h1>{{ project.name }}</h1>
+	<ul>
+    Area del Proyecto: <br/>
+  <form action="/project/editProj/" method="post">
+	<input type="text" name="area" id="area" value="{{ project.area }}"><br>
+    Descripción: <br />
+	<textarea name="description" id="description" cols="50" rows="5">{{ project.description }}</textarea><br/ >
+    Fecha de Inicio:<br/> 
+	<input type="datetime-local" name="date_start" id="start_date" value="{{ project.date_start }}"/><br>
+    Fecha de Culminación:<br> 
+	<input type="datetime-local" name="date_end" id="end_date" value="{{ project.date_end }}" /><br>
+    Costo del Proyecto:<br/> 
+	<input type="cost" name="cost" id="cost" value="{{ project.cost }}" /><br>
+    Lider del Proyecto:<br/> 
+	<input type="text" name="leader" id="leader" value ="{{ project.leader.Role.name }}" /><br>
+    Metodología: <br />
+    {% csrf_token %}
+    <select name="methodology" >    
+    {% for methodology in latest_methodology_list %}
+    <option  id="methodology{{ forloop.counter }}" value="{{ methodology.id }}">{{methodology.name}}</option> <br />
+    {% endfor %}
+	</select><br/>
+    <input type="submit" value="Guardar" /><br/>
+    <a href="/project/"> Regresar </a>
+   </form>
+	</ul>
+
+{% endblock %}

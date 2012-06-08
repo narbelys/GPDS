@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if latest_methodology_list %}
+        <h1>Nuevo Proyecto</h1>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        <form action="/project/createProj/" method="post">
+            Nombre: <br/><input type="text" name="name" id="name" border="1"/><br/>
+			Tiempo Estimado: <br/><input type="text" name="time" id="time" /> <br/>
+			Area: <br/><input type="text" name="area" id="area"/> <br/>
+            Descripción: <br/>
+            <textarea name="description" id="description" cols="50" rows="5">Danos una colorida descripcion!</textarea><br/ >
+			Fecha Inicio<br/> <input type="datetime-local" name="date_start" id="start_date" /><br/ >
+			Fecha Fin <br/><input type="datetime-local" name="date_end" id="end_date" /><br/ >
+			Costo<br/> <input type="cost" name="cost" id="cost" /> <br/ >
+			Lider del Proyecto <br/><input type="text" name="leader" id="leader" /><br/ >
+            Metodología: <br />
+            {% csrf_token %}
+            <select name="methodology">    
+            {% for methodology in latest_methodology_list %}
+            <option  id="methodology{{ forloop.counter }}" value="{{ methodology.id }}">{{methodology.name}}</option> <br />
+            {% endfor %}
+			</select><br/>
+            Participantes: <br />
+            {% csrf_token %}
+            <select name="participants">    
+            {% for participants in latest_users_list %}
+            <option  id="participants{{ forloop.counter }}" value="{{ participants.id }}">{{participants.name}}</option> <br />
+            {% endfor %}
+			</select>
+            <br/>
+            <input type="submit" value="Guardar" /><br/>
+            <a href="/project/"> Cancelar </a>
+        </form>
+    {% else %}
+        <p>Primero debe crear metodologías.</p> 
+    {% endif %}
+{% else %}
+        <p>Primero debe iniciar sesión</p>
+{% endif %}
+
+{% endblock %}
+         
+

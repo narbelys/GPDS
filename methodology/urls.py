@@ -8,6 +8,8 @@ urlpatterns = patterns('',
     url(r'^(?P<methodology_id>\d+)/$', 'methodology.views.detail'),
     url(r'^create/$', 'methodology.views.crear'),
     url(r'^createacc/$', 'methodology.views.crearacc'),
+    url(r'^change/(?P<methodology_id>\d+)/$', 'methodology.views.update'),
+    url(r'^delete/(?P<methodology_id>\d+)/$', 'methodology.views.delete'),
     # Software Process Index
     url(r'^indexswp/$', 'methodology.views.indexswp'),
     # Software Process Details
