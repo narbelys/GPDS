@@ -23,7 +23,7 @@ def detail(request, methodology_id):
         p = Methodology.objects.get(pk=methodology_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('detail.html', {'methodology': p})
+    return render_to_response('methodology/detail.html', {'methodology': p})
 
 @login_required
 def crear(request):

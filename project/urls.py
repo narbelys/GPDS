@@ -16,9 +16,9 @@ urlpatterns = patterns('',
     url(r'^$', 'project.views.indexProject'),
     url(r'^(?P<project_id>\d+)/$', 'project.views.detailProject'),
     url(r'^createProject/$', 'project.views.createProject'),
-    url(r'^editProject(?P<project_id>\d+)/$', 'project.views.editProject'),
     url(r'^createProj/$', 'project.views.createProj'),
-    url(r'^editProj/$', 'project.views.editProj'),
+    url(r'^edit/(?P<project_id>\d+)/$', 'project.views.editProj'),
+    url(r'^delete/(?P<project_id>\d+)/$', 'project.views.deleteProj'),
     url(r'^(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
 
 )

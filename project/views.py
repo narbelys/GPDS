@@ -55,25 +55,35 @@ def createProj(request):
         return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
 
 @login_required
-def editProject(request, project_id):
-        #mt = Methodology.objects.get(pk=request.POST['methodology'])
-        latest_methodology_list = Methodology.objects.all().order_by('-id')
-        p = Project.objects.get(pk=project_id)
-        #pi = Project    (name= project_id,description=request.POST['description'],date_start=request.POST['date_start'],date_end=request.POST['date_end'],cost=request.POST['cost'],area=request.POST['area'], methodology=mt,leader=request.user,)
-        #pi.save()
-        return render_to_response('project/editProject.html', {'project': p, 'latest_methodology_list':latest_methodology_list})
-
-
-#@csrf_protect
-@login_required
 def editProj(request, project_id):
-        mt = Methodology.objects.get(pk=request.POST['methodology'])
-       # project_id.description=request.POST['description']
-        #project_id.date_start=request.POST['date_start']
-        #project_id.date_end=request.POST['date_end']
-        #project_id.cost=request.POST['cost']
-        #project_id.area=request.POST['area']
-        #project_id.methodology=mt
-        #project_id.leader=request.user
-        #project_id.save()
-        return render_to_response('project.views.indexProject', args=())
+    if request.method == 'POST':
+        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.indexProject', args=()))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
+    else:
+        form = ProjectChangeForm(instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('project/editProject.html',
+                              {'form':form,
+                               'next':redirect_to,
+                               'project_id':project_id},
+                              context_instance=RequestContext(request))
+
+@login_required 
+def deleteProj(request, project_id):
+    if request.method == 'POST':    
+        form = ProjectDeleteForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.indexProject', args=()))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
+    else:
+        form = ProjectDeleteForm(instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('project/deleteProject.html',
+                              {'form':form,
+                               'next':redirect_to,
+                               'project_id':project_id},
+                              context_instance=RequestContext(request))

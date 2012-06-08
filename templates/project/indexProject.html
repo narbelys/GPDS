@@ -6,7 +6,11 @@
     <ul>
     <h1> Proyectos Disponibles </h1>
     {% for project in latest_project_list %}
-        <li><a href="/project/{{ project.id }}/">{{ project.name }}</a></li>
+        <li>
+			<td><a href="/project/{{ project.id }}/">{{ project.name }}</a></td>
+	        <td><a href="/project/edit/{{ project.id }}/">Editar</a></td>
+	        <td><a href="/project/delete/{{ project.id }}/">Eliminar</a></td>
+		</li>
     {% endfor %}
 	<br>
     <a href="/project/createProject/">Crear Nuevo</a>
@@ -24,7 +28,5 @@
 <a href="/project/invitePart/">Invitar Participantes</a>
 <br>
 <a href="/activity/index.html">Actividades</a>
-
-
 
 {% endblock %}
