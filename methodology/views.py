@@ -42,10 +42,8 @@ def crearacc(request):
         else:
             p = Methodology(name=request.POST['name'], description=request.POST['descripcion'], software_process=ps, owner=request.user, is_private=False)
         p.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return render_to_response('methodology/index.html', 
+	latest_meth_list = Methodology.objects.all()
+        return render_to_response('methodology/index.html', {'latest_meth_list': latest_meth_list,},
                                      context_instance=RequestContext(request))
 
 @login_required
