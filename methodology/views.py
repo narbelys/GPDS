@@ -21,7 +21,8 @@ def detail(request, methodology_id):
         p = Methodology.objects.get(pk=methodology_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('methodology/detail.html', {'methodology': p})
+    return render_to_response('methodology/detail.html', {'methodology': p},
+                                   context_instance=RequestContext(request))
 
 @login_required
 def crear(request):
@@ -29,7 +30,9 @@ def crear(request):
         return HttpResponseRedirect(reverse('methodology.views.index', args=()))
     else:
         latest_sw_list = SoftwareProcess.objects.all().order_by('-id')
-        return render_to_response('methodology/create.html', {'latest_sw_list':latest_sw_list, }, context_instance=RequestContext(request))
+        return render_to_response('methodology/create.html', 
+                                     {'latest_sw_list':latest_sw_list, }, 
+                                     context_instance=RequestContext(request))
 
 @login_required
 def crearacc(request):
@@ -42,7 +45,8 @@ def crearacc(request):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('methodology.views.index', args=()))
+        return render_to_response('methodology/index.html', 
+                                     context_instance=RequestContext(request))
 
 @login_required
 def update(request, methodology_id):    
@@ -97,9 +101,9 @@ def ListarRol(request, methodology_id):
 @login_required
 def indexswp(request):
     latest_swp_list = SoftwareProcess.objects.all()
-    t = loader.get_template('methodology/indexswp.html')
-    c = Context({'latest_swp_list': latest_swp_list, })
-    return HttpResponse(t.render(c))
+    return render_to_response('methodology/indexswp.html', 
+                                     {'latest_swp_list':latest_swp_list, }, 
+                                     context_instance=RequestContext(request))
 
 # Software Process Details
 @login_required
@@ -108,4 +112,5 @@ def detailswp(request, software_process_id):
         p = SoftwareProcess.objects.get(pk=software_process_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('methodology/detailswp.html', {'software_process': p})
+    return render_to_response('methodology/detailswp.html', {'software_process': p},        
+                                       context_instance=RequestContext(request))
