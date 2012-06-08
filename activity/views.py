@@ -33,6 +33,35 @@ def detailtec(request, technique_id):
         raise Http404
     return render_to_response('activity/detailtec.html', {'technique': p})
 
+def addtec(request):      
+    if request.method == 'POST':
+        form = TechniqueForm(request.POST)
+        if form.is_valid():
+            technique = form.save()
+            return detailtec(request, technique_id=technique.id)
+    else:
+        form = TechniqueForm()
+    return render_to_response('activity/formtec.html', 
+                              {'form':form,
+                               'action': 'add',
+                               'button': 'Agregar'},
+                              context_instance=RequestContext(request))
+                              
+def updatetec(request,technique_id):
+    tect = Technique.objects.get(id=technique_id)
+    if request.method == 'POST':
+        form = TechniqueForm(request.POST,instance=tect)
+        if form.is_valid():
+            technique = form.save()
+            return detailtec(request, technique_id=technique.id)
+    else:
+        form = TechniqueForm(instance=tect)
+    return render_to_response('activity/formtec.html', 
+                              {'form':form,
+                               'action': 'update/' + technique_id + '/',
+                               'button': 'Actualizar'},
+                              context_instance=RequestContext(request))
+
 def artifacts(request, activity_id):
     p = get_object_or_404(Activity, pk=activity_id)
     artifacts = Artifact.objects.filter(activity__exact=p.id)

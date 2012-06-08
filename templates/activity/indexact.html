@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block content %}
+
+<div class="container">
+{% if message %}
+ <b>{{ message }}</b>
+ <p>
+ {% endif %}
+ {% if latest_act_list %}
+     <table>
+     {% for act in latest_act_list %}
+         <tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
+              <td>{{ act.name }}</td>
+              <td><a href='{{ act.id }}/artifacts'>Artefactos</a></td>
+         </tr>
+     {% endfor %}
+     </table>
+     <p>
+ {% else %}
+     <p>No se encontraron actividades.</p>
+ {% endif %}
+ <p>
+<p>
+<a href='/activity/indextec'>Ir a Tecnicas</a>
+</p>
+ </div>
+
+{% endblock %}
