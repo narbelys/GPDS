@@ -19,7 +19,7 @@ def sign_up(request):
         messages.error(request, "Please verify your data and try again.")
     else:
         form = UserCreationForm()
-    return render_to_response('sign_up.html',
+    return render_to_response('/users/sign_up.html',
                                     {'form': form}, 
                                     context_instance=RequestContext(request))
 
@@ -34,7 +34,7 @@ def update(request):
     else:
         form = BasicUserChangeForm(instance=request.user)
     redirect_to = request.REQUEST.get('next','')
-    return render_to_response('update.html', 
+    return render_to_response('/users/update.html', 
                               {'form':form,
                                'next':redirect_to},
                               context_instance=RequestContext(request))
