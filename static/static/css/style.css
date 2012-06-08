@@ -43,7 +43,7 @@ body{
   border: none;
   background: #0099CC;
 }
-.blackfoot{  margin-left: auto;  margin-right: auto;background-color:#191a17; height:290px;}
+.blackfoot{  margin-left: auto;  margin-right: auto;background-color:#000000; height:290px;}
 a {text-decoration:none; cursor:pointer}
 ul {margin:0; padding:0;list-style-image:none}
 a:hover {text-decoration:none}
