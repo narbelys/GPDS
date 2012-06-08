@@ -14,9 +14,9 @@ from django.contrib.auth.decorators import login_required, login_required, permi
 class ProjectChangeForm(ModelForm):
     class Meta:
         model = Project
-        fields = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader')
+        fields = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', 'participants')
         
 class ProjectDeleteForm(ModelForm):
     class Meta:
         model = Project
-        exclude = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader')
+        exclude = ('name','description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', 'participants')
