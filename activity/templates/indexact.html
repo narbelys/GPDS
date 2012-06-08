@@ -12,7 +12,7 @@
      <table>
      {% for act in latest_act_list %}
          <tr bgcolor='{% cycle FFFFFF,EEEEEE as rowcolor %}'>
-              <td>{{ act.name }} </td>
+              <td>{{ act.name }}</td>
               <td><a href='{{ act.id }}/artifacts'>Artefactos</a></td>
          </tr>
      {% endfor %}
@@ -22,6 +22,9 @@
      <p>No se encontraron actividades.</p>
  {% endif %}
  <p>
+<p>
+<a href='/activity/indextec'>Ir a Tecnicas</a>
+</p>
  </div>
 
 {% endblock %}

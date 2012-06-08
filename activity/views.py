@@ -44,7 +44,22 @@ def addtec(request):
     return render_to_response('formtec.html', 
                               {'form':form,
                                'action': 'add',
-                               'button': 'Add'},
+                               'button': 'Agregar'},
+                              context_instance=RequestContext(request))
+                              
+def updatetec(request,technique_id):
+    tect = Technique.objects.get(id=technique_id)
+    if request.method == 'POST':
+        form = TechniqueForm(request.POST,instance=tect)
+        if form.is_valid():
+            technique = form.save()
+            return detailtec(request, technique_id=technique.id)
+    else:
+        form = TechniqueForm(instance=tect)
+    return render_to_response('formtec.html', 
+                              {'form':form,
+                               'action': 'update/' + technique_id + '/',
+                               'button': 'Actualizar'},
                               context_instance=RequestContext(request))
     
 def artifacts(request, activity_id):

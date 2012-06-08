@@ -6,7 +6,9 @@
     <ul>
     <h1> Técnicas Disponibles </h1>
     {% for technique in latest_tec_list %}
-        <li><a href="/activity/indextec/{{ technique.id }}/">{{ technique.name }} </a></li>
+        <li>{{ technique.name }}
+        <a href="/activity/indextec/{{ technique.id }}/"> Consultar </a>
+        <a href="/activity/indextec/update/{{ technique.id }}/"> Editar </a></li>
     {% endfor %}
     </ul>
 {% else %}
