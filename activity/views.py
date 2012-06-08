@@ -10,8 +10,10 @@ from django.core.urlresolvers import reverse
 from forms import *
 from models import *
 from django.shortcuts import render_to_response, get_object_or_404
+from django.contrib.auth.decorators import login_required, login_required, permission_required
 
 # Index de Actividad
+@login_required 
 def indexact(request):
     latest_act_list = Activity.objects.all()
     return render_to_response('activity/indexact.html',
@@ -19,6 +21,7 @@ def indexact(request):
                                     context_instance=RequestContext(request))
 
 # Technique Index
+@login_required 
 def indextec(request):
     latest_tec_list = Technique.objects.all()
     return render_to_response('activity/indextec.html',
@@ -26,6 +29,7 @@ def indextec(request):
                                     context_instance=RequestContext(request))
 
 # Technique Details
+@login_required 
 def detailtec(request, technique_id):
     try:
         p = Technique.objects.get(pk=technique_id)
@@ -33,7 +37,7 @@ def detailtec(request, technique_id):
         raise Http404
     return render_to_response('activity/detailtec.html', {'technique': p},
                                    context_instance=RequestContext(request))
-
+@login_required 
 def addtec(request):      
     if request.method == 'POST':
         form = TechniqueForm(request.POST)
@@ -47,7 +51,8 @@ def addtec(request):
                                'action': 'add',
                                'button': 'Agregar'},
                               context_instance=RequestContext(request))
-                              
+
+@login_required                              
 def updatetec(request,technique_id):
     tect = Technique.objects.get(id=technique_id)
     if request.method == 'POST':
@@ -63,12 +68,14 @@ def updatetec(request,technique_id):
                                'button': 'Actualizar'},
                               context_instance=RequestContext(request))
 
+@login_required 
 def artifacts(request, activity_id):
     p = get_object_or_404(Activity, pk=activity_id)
     artifacts = Artifact.objects.filter(activity__exact=p.id)
     return render_to_response('activity/artifacts.html', {'artifacts': artifacts},
                                      context_instance=RequestContext(request))
 
+@login_required 
 def create_artifact(request, project_id):
     if request.method == 'GET':
         p = get_object_or_404(Project, pk=project_id)
@@ -88,7 +95,8 @@ def create_artifact(request, project_id):
         tec = Technique.objects.all()
         form = upload_artifact()    
         return render_to_response('activity/create_artifact.html', {'act': act, 'tech':tec, 'form': form, 'msj':'Todos los campos son necesarios'}, context_instance=RequestContext(request))
-    
+
+@login_required     
 def open_artifact(request, artifact_id, activity_id): 
     art = get_object_or_404(Artifact, pk=artifact_id)
     (art.content).open()
