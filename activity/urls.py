@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^indextec/$', 'activity.views.indextec'),
     # Technique Details
     url(r'^indextec/(?P<technique_id>\d+)/$', 'activity.views.detailtec'),
+    # Technique Create
+    url (r'^indextec/add', 'activity.views.addtec'),
     url(r'^(?P<activity_id>\d+)/artifacts/(?P<artifact_id>\d+)$', 'activity.views.open_artifact'), 
     url(r'^(?P<activity_id>\d+)/artifacts$', 'activity.views.artifacts'), 
 )
