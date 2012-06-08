@@ -1,4 +1,11 @@
 from django import forms
+from django.forms.models import ModelForm
+from activity.models import *
+
+class TechniqueForm(ModelForm):
+    class Meta:
+        model = Technique
+        fields = ('name','description',)
 
 class upload_artifact(forms.Form):
     name = forms.CharField(max_length=30)

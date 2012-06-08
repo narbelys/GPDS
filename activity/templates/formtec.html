@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+	<h1>{{ "Crear Tecnica" }}</h1>
+	
+	{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+	
+	<form action="/activity/indextec/{{ action }}" method="POST" >
+		{% csrf_token %}
+		<table>
+		{{ form.as_table }}
+		</table>
+		<input type="submit" value="{{ button }}" />
+	</form>
+    <a href="/activity/indextec/"> Regresar </a>
+</div>
+
+{% endblock %}
