@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if latest_project_list %}
+    <ul>
+    <h1> Proyectos Disponibles </h1>
+    {% for project in latest_project_list %}
+        <li>
+			<td><a href="/project/{{ project.id }}/">{{ project.name }}</a></td>
+	        <td><a href="/project/update/{{ project.id }}/">Editar</a></td>
+	        <td><a href="/project/delete/{{ project.id }}/">Eliminar</a></td>
+		</li>
+    {% endfor %}
+	<br>
+    <a href="/project/create/">Crear Nuevo</a>
+    </ul>
+{% else %}
+    <h1> Proyectos Disponibles </h1>
+    <a href="/project/create/">Crear Nuevo</a>
+{% endif %}
+
+<br>
+<br>
+<h1> Acciones </h1>
+<a href="/project/listPart/">Participantes</a>
+<br>
+<a href="/project/invitePart/">Invitar Participantes</a>
+<br>
+<a href="/activity/index.html">Actividades</a>
+
+{% endblock %}
