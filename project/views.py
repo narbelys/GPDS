@@ -13,73 +13,68 @@ from django.contrib.auth.decorators import login_required, login_required, permi
 from users.models import UserProfile
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
-from project.form import ProjectChangeForm, ProjectDeleteForm
+from project.form import ProjectChangeForm, ProjectDeleteForm, ProjectCreateForm
 
 @login_required
-def indexProject(request):
+def manage(request):
     latest_project_list = Project.objects.all()
     latest_users_list = UserProfile.objects.all()
-    return render_to_response('project/indexProject.html',
+    return render_to_response('project/manage.html',
                                     {'latest_project_list': latest_project_list,}, 
                                     context_instance=RequestContext(request))   
 
 @login_required
-def detailProject(request, project_id):
+def read(request, project_id):
     try:
         p = Project.objects.get(pk=project_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('project/detailProject.html', {'project': p},
+    return render_to_response('project/read.html', {'project': p},
                                    context_instance=RequestContext(request))
 
 @login_required
-def createProject(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
-    else:
-        latest_methodology_list = Methodology.objects.all().order_by('-id')
-        latest_users_list = UserProfile.objects.all().order_by('-user')
-        return render_to_response('project/createProject.html', {'latest_methodology_list':latest_methodology_list, 'latest_users_list': latest_users_list, }, context_instance=RequestContext(request))
-
-@login_required
-def createProj(request):
-        mt = Methodology.objects.get(pk=request.POST['methodology'])
-       # l  = UserProfile.objects.get(pk=request.POST['leader'])
-#        usr = User.objects.get(pk=request.POST['participants'])
-        p = Project    (name=request.POST['name'], description=request.POST['description'], date_start=request.POST['date_start'], date_end=request.POST['date_end'], cost=request.POST['cost'], area=request.POST['area'], methodology=mt, leader=request.user,)
-        p.save()
-        return render_to_response('project/indexProject.html', 
-                                   context_instance=RequestContext(request))
-
-@login_required
-def editProj(request, project_id):
+def create(request):
     if request.method == 'POST':
-        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
-        redirect_to = request.REQUEST.get('next', reverse('project.views.indexProject', args=()))
+        form = ProjectCreateForm(request.POST)
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
+        latest_project_list = Project.objects.all()
+        return render_to_response('project/manage.html', {'latest_project_list': latest_project_list},
+                                   context_instance=RequestContext(request))
+    else:
+        form = ProjectCreateForm(request.POST)
+        return render_to_response('project/create.html', {'form':form}, context_instance=RequestContext(request))
+
+
+@login_required
+def update(request, project_id):
+    if request.method == 'POST':
+        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.manage', args=()))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('project.views.manage', args=()))
     else:
         form = ProjectChangeForm(instance=Project.objects.get(pk=project_id))
         redirect_to = request.REQUEST.get('next', '')
-    return render_to_response('project/editProject.html',
+    return render_to_response('project/update.html',
                               {'form':form,
                                'next':redirect_to,
                                'project_id':project_id},
                               context_instance=RequestContext(request))
 
 @login_required 
-def deleteProj(request, project_id):
+def delete(request, project_id):
     if request.method == 'POST':    
         form = ProjectDeleteForm(request.POST, instance=Project.objects.get(pk=project_id))
-        redirect_to = request.REQUEST.get('next', reverse('project.views.indexProject', args=()))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.manage', args=()))
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('project.views.indexProject', args=()))
+        return HttpResponseRedirect(reverse('project.views.manage', args=()))
     else:
         form = ProjectDeleteForm(instance=Project.objects.get(pk=project_id))
         redirect_to = request.REQUEST.get('next', '')
-    return render_to_response('project/deleteProject.html',
+    return render_to_response('project/delete.html',
                               {'form':form,
                                'next':redirect_to,
                                'project_id':project_id},

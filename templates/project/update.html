@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<form action="/project/update/{{ project_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+	<input type="submit" value="Update" />
+</form>
+
+{% endblock %}
