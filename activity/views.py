@@ -102,3 +102,60 @@ def open_artifact(request, artifact_id, activity_id):
     (art.content).open()
     return HttpResponse('holagatito')
 
+
+###################################################################################################
+#                                Manage, CRUD for Activity                                        #
+###################################################################################################
+
+# @login_required
+# def manage_activity
+
+# @login_required
+# def create_activity
+
+# @login_required
+# def read_activity
+
+# @login_required
+# def update_activity
+
+# @login_required
+# def delete_activity
+
+###################################################################################################
+#                                Manage, Read, Add for Technique                                  #
+###################################################################################################
+
+# @login_required
+# def manage_technique
+
+# @login_required
+# def read_technique
+
+# @login_required
+# def add_technique
+
+
+###################################################################################################
+#                               Manage, CRUD, Open for Artifacts                                  #
+###################################################################################################
+
+# @login_required
+# def manage_artifacts
+
+# @login_required
+# def create_artifacts
+
+# @login_required
+# def read_artifacts
+
+# @login_required
+# def update_artifacts
+
+# @login_required
+# def delete_artifacts
+
+# @login_required
+# def open_artifacts
+
+

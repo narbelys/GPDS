@@ -112,3 +112,45 @@ def detailswp(request, software_process_id):
         raise Http404
     return render_to_response('methodology/detailswp.html', {'software_process': p},        
                                        context_instance=RequestContext(request))
+
+
+###################################################################################################
+#                                Manage, CRUD for Methodology                                     #
+###################################################################################################
+
+# @login_required
+# def manage_methodology
+
+# @login_required
+# def create_methodology
+
+# @login_required
+# def read_methodology
+
+# @login_required
+# def update_methodology
+
+# @login_required
+# def delete_methodology
+
+###################################################################################################
+#                                Manage, Read for Software Process                                #
+###################################################################################################
+
+# @login_required
+# def manage_softwareprocess
+
+# @login_required
+# def read_softwareprocess
+
+###################################################################################################
+#                                        Manage, Read for Role                                    #
+###################################################################################################
+
+# @login_required
+# def manage_role
+
+# @login_required
+# def read_role
+
+
