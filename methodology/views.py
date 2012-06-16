@@ -1,5 +1,5 @@
 from methodology.models import Methodology, SoftwareProcess
-from methodology.form import MethodologyChangeForm, MethodologyDeleteForm
+from methodology.form import MethodologyChangeForm, MethodologyDeleteForm, MethodologyCreateForm
 from django.http import HttpResponse
 from django.http import Http404
 from django.shortcuts import render_to_response
@@ -9,52 +9,48 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
 
 @login_required
-def index(request):
+def manage_methodology(request):
     latest_meth_list = Methodology.objects.all()
-    return render_to_response('methodology/index.html',
+    return render_to_response('methodology/manage_methodology.html',
                                     {'latest_meth_list': latest_meth_list,}, 
                                     context_instance=RequestContext(request))
 
 @login_required
-def detail(request, methodology_id):
+def read_methodology(request, methodology_id):
     try:
         p = Methodology.objects.get(pk=methodology_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('methodology/detail.html', {'methodology': p},
+    return render_to_response('methodology/read_methodology.html', {'methodology': p},
                                    context_instance=RequestContext(request))
 
 @login_required
-def crear(request):
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect(reverse('methodology.views.index', args=()))
+def create_methodology(request):
+    if request.method == 'POST':
+        form = MethodologyCreateForm(request.POST)
+        if form.is_valid():
+	    is_private = request.POST.get('is_private', False)
+            p = Methodology(name=request.POST['name'], description=request.POST['description'], software_process=SoftwareProcess.objects.get(pk=request.POST['software_process']), owner=request.user, is_private=is_private)
+	    p.save()
+            return read_methodology(request, methodology_id=p.id)
     else:
-        latest_sw_list = SoftwareProcess.objects.all().order_by('-id')
-        return render_to_response('methodology/create.html', 
-                                     {'latest_sw_list':latest_sw_list, }, 
-                                     context_instance=RequestContext(request))
+        form = MethodologyCreateForm()
+        return render_to_response('methodology/create_methodology.html', 
+                              {'form':form,
+                               'action': 'create',
+                               'button': 'Guardar'},
+                              context_instance=RequestContext(request))
 
-@login_required
-def crearacc(request):
-        ps = SoftwareProcess.objects.get(pk=request.POST['sw'])
-        if request.POST['ip'] == "1":
-            p = Methodology(name=request.POST['name'], description=request.POST['descripcion'], software_process=ps, owner=request.user, is_private=True)
-        else:
-            p = Methodology(name=request.POST['name'], description=request.POST['descripcion'], software_process=ps, owner=request.user, is_private=False)
-        p.save()
-	latest_meth_list = Methodology.objects.all()
-        return render_to_response('methodology/index.html', {'latest_meth_list': latest_meth_list,},
-                                     context_instance=RequestContext(request))
 
 @login_required
 def update(request, methodology_id):    
     
     if request.method == 'POST':
         form = MethodologyChangeForm(request.POST, instance=Methodology.objects.get(pk=methodology_id))
-        redirect_to = request.REQUEST.get('next', reverse('methodology.views.index', args=()))
+        redirect_to = request.REQUEST.get('next', reverse('methodology.views.manage_methodology', args=()))
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('methodology.views.index', args=()))
+        return HttpResponseRedirect(reverse('methodology.views.manage_methodology', args=()))
     else:
         form = MethodologyChangeForm(instance=Methodology.objects.get(pk=methodology_id))
         redirect_to = request.REQUEST.get('next', '')
@@ -68,10 +64,10 @@ def update(request, methodology_id):
 def delete(request, methodology_id):
     if request.method == 'POST':    
         form = MethodologyDeleteForm(request.POST, instance=Methodology.objects.get(pk=methodology_id))
-        redirect_to = request.REQUEST.get('next', reverse('methodology.views.index', args=()))
+        redirect_to = request.REQUEST.get('next', reverse('methodology.views.manage_methodology', args=()))
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('methodology.views.index', args=()))
+        return HttpResponseRedirect(reverse('methodology.views.manage_methodology', args=()))
     else:
         form = MethodologyDeleteForm(instance=Methodology.objects.get(pk=methodology_id))
         redirect_to = request.REQUEST.get('next', '')

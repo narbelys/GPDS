@@ -12,6 +12,7 @@ class Methodology(models.Model):
     software_process = models.ForeignKey('SoftwareProcess')
     owner = models.ForeignKey(User, null=True, blank=True)
     enabled = models.BooleanField(default=True)
+    
     def __unicode__(self):
         return self.name
 

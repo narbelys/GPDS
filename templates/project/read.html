@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ project.name }}</h1>
+<ul>
+    Descripción: {{ project.description }}<br>
+    Fecha de Inicio: {{ project.date_start }}<br>
+    Fecha de Culminación: {{ project.date_end }}<br>
+    Costo del Proyecto: {{ project.cost }}<br>
+    Area del Proyecto: {{ project.area }}<br>
+    Metodología del Proyecto: {{ project.methodology.name }}<br>
+    Lider del Proyecto: {{ project.leader.Role.name }}<br>
+    <a href="/project/"> Regresar </a>
+</ul>
+
+{% endblock %}

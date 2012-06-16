@@ -4,11 +4,10 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Estos Url seran sustituidos por los News URL's
-    url(r'^$', 'methodology.views.index'),
-    url(r'^(?P<methodology_id>\d+)/$', 'methodology.views.detail'),
-    url(r'^create/$', 'methodology.views.crear'),
-    url(r'^createacc/$', 'methodology.views.crearacc'),
+
+    url(r'^$', 'methodology.views.manage_methodology'),
+    url(r'^(?P<methodology_id>\d+)/$', 'methodology.views.read_methodology'),
+    url(r'^create/$', 'methodology.views.create_methodology'),
     url(r'^change/(?P<methodology_id>\d+)/$', 'methodology.views.update'),
     url(r'^delete/(?P<methodology_id>\d+)/$', 'methodology.views.delete'),
     # Software Process Index
@@ -33,3 +32,4 @@ urlpatterns = patterns('',
     url(r'^manage_role/$', 'methodology.views.manage_role'),
     url(r'^read_role/(?P<role_id>\d+)/$', 'methodology.views.read_role'),
 )
+
