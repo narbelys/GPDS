@@ -11,10 +11,15 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
 
 
-class ProjectChangeForm(ModelForm):
+class ProjectCreateForm(ModelForm):
     class Meta:
         model = Project
         fields = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', 'participants')
+
+class ProjectChangeForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = ('description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'participants')
         
 class ProjectDeleteForm(ModelForm):
     class Meta:

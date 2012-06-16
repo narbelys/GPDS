@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+# Display a list of applications
+# requires a variable 'objects_list' of type query_set
+
+{% block content %}
+
+<div class="container">
+
+<p><span class="label">Username:</span> {{ user.username   }} </p>
+<p><span class="label">Nombre:  </span> {{ user.first_name }} </p>
+<p><span class="label">Apellido:</span> {{ user.last_name  }} </p>
+<p><span class="label">Email:   </span> {{ user.email      }} </p>
+<p><span class="label">Roles:   </span> </p>
+{% if roles %}
+	{% for role in roles %}
+		<p> {{ role.name }} </p>
+	{% endfor %}
+{% else %}
+	El usuario no tiene ningun rol asignado.
+{% endif %}
+
+</div>
+
+{% endblock %}	

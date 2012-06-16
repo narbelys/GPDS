@@ -1,13 +1,17 @@
-# Create your views here.
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, login_required, \
+    permission_required
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.core.context_processors import csrf
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.template import Context, loader, RequestContext
 from users.forms import BasicUserChangeForm
-from django.core.context_processors import csrf
-from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required, login_required, permission_required
+from django.contrib.auth.models import User
+from django.contrib.auth import *
+from users.models import Role, Membership
+from sets import Set
 
 def sign_up(request):
     if request.method == 'POST':
@@ -24,7 +28,18 @@ def sign_up(request):
                                     context_instance=RequestContext(request))
 
 @login_required
-def update(request):      
+def read_user(request,user_id):
+    user = get_object_or_404(User,pk=user_id)
+    memberships = Membership.objects.filter(user=user)
+    roles = Set([])
+    for membership in memberships:
+        if membership.project.enabled:
+            roles.add(membership.role)
+    return render_to_response('users/read_user.html', {'user': user, 'roles':roles}, 
+                              context_instance=RequestContext(request))
+
+@login_required
+def update_user(request):      
     if request.method == 'POST':
         form = BasicUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
@@ -34,7 +49,7 @@ def update(request):
     else:
         form = BasicUserChangeForm(instance=request.user)
     redirect_to = request.REQUEST.get('next','')
-    return render_to_response('users/update.html', 
+    return render_to_response('users/update_user.html', 
                               {'form':form,
                                'next':redirect_to},
                               context_instance=RequestContext(request))

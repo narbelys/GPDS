@@ -11,6 +11,11 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
 
 
+class MethodologyCreateForm(ModelForm):
+    class Meta:
+        model = Methodology
+        fields = ('name', 'description', 'is_private', 'software_process')
+
 class MethodologyChangeForm(ModelForm):
     class Meta:
         model = Methodology

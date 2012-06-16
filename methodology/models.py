@@ -12,6 +12,7 @@ class Methodology(models.Model):
     software_process = models.ForeignKey('SoftwareProcess')
     owner = models.ForeignKey(User, null=True, blank=True)
     enabled = models.BooleanField(default=True)
+    
     def __unicode__(self):
         return self.name
 
@@ -31,5 +32,6 @@ class SoftwareProcess(models.Model):
     def __unicode__(self):
         return self.name
     
+
 admin.site.register(Methodology)
 admin.site.register(SoftwareProcess)

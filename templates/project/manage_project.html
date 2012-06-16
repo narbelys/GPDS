@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+# Display a list of applications
+# requires a variable 'objects_list' of type query_set
+
+{% block content %}
+
+<div class="container">
+
+{% if projects %}
+
+{% for p in projects %}
+
+<a href="/project/read_project/{{ p.project.id }}/"> {{ p.name }} </a>
+</br>
+
+{% endfor %}
+
+{% else %}
+	Usted no pertenece a ningun proyecto.
+{% endif %}
+
+</div>
+
+{% endblock %}	

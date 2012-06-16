@@ -20,6 +20,7 @@ class Activity(models.Model):
     roles = models.ManyToManyField(Role)
     software_process = models.ForeignKey(SoftwareProcess)
     techniques = models.ManyToManyField('Technique')
+    enabled = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name
