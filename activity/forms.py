@@ -16,3 +16,5 @@ class upload_artifact(forms.Form):
     
     def get_fields(self):
         return self.cleaned_data
+        
+        

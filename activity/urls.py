@@ -13,6 +13,10 @@ urlpatterns = patterns('',
     url(r'^indextec/add$', 'activity.views.addtec'),
     # Technique Update
     url(r'^indextec/update/(?P<technique_id>\d+)/$', 'activity.views.updatetec'),
-    url(r'^(?P<activity_id>\d+)/artifacts/(?P<artifact_id>\d+)$', 'activity.views.open_artifact'), 
-    url(r'^(?P<activity_id>\d+)/artifacts$', 'activity.views.artifacts'), 
+    # Open Artifact
+    url(r'^(?P<activity_id>\d+)/artifacts/(?P<artifact_id>\d+)$', 'activity.views.download_artifact'), 
+    # All Artifacts
+    url(r'^(?P<activity_id>\d+)/artifacts$', 'activity.views.read_artifact'), 
+    # Artifact Create
+    url(r'^project/(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
 )

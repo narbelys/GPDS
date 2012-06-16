@@ -1,0 +1,19 @@
+<html>
+	<body>
+	<h1>Artefactos</h1>
+        {% if artifacts %}
+            <table style="padding: 2px">
+            {% for i in artifacts%}
+                <tr>
+                    <td><a href="artifacts/{{i.id}}">{{ i }}</a></td>
+                    <td>{{ i.description }}</td>
+                    <td>{{ i.activity }}</td>
+                    <td>{{ i.technique }}</td>
+                </tr>
+            {% endfor %}	
+            </table>
+        {% else %}
+             <p>No se encontraron artefactos asociados.</p>
+        {% endif %}
+	</body>
+</html>
