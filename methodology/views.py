@@ -8,6 +8,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
 
+
+###################################################################################################
+#                                Manage, CRUD for Methodology                                     #
+###################################################################################################
+
+
 @login_required
 def manage_methodology(request):
     latest_meth_list = Methodology.objects.all()
@@ -77,6 +83,37 @@ def delete(request, methodology_id):
                                'methodology_id':methodology_id},
                               context_instance=RequestContext(request))
     
+
+###################################################################################################
+#                                Manage, Read for Software Process                                #
+###################################################################################################
+
+
+# Manage Software Process
+@login_required
+def manage_softwareprocess(request):
+    latest_swp_list = SoftwareProcess.objects.all()
+    return render_to_response('methodology/manage_softwareprocess.html', 
+							{'latest_swp_list':latest_swp_list, },
+							context_instance=RequestContext(request))
+
+# Read Software Process
+@login_required
+def read_softwareprocess(request, softwareprocess_id):
+    try:
+        p = SoftwareProcess.objects.get(pk=softwareprocess_id)
+    except Poll.DoesNotExist:
+        raise Http404
+    return render_to_response('methodology/read_softwareprocess.html', 
+							{'software_process': p}, 
+							context_instance=RequestContext(request))
+
+
+###################################################################################################
+#                                        Manage, Read for Role                                    #
+###################################################################################################
+
+
 #Consultar rol
 
 @login_required 
@@ -91,23 +128,7 @@ def ListarRol(request, methodology_id):
     
     
         
-# Software Process Index
-@login_required
-def indexswp(request):
-    latest_swp_list = SoftwareProcess.objects.all()
-    return render_to_response('methodology/indexswp.html', 
-                                     {'latest_swp_list':latest_swp_list, }, 
-                                     context_instance=RequestContext(request))
 
-# Software Process Details
-@login_required
-def detailswp(request, software_process_id):
-    try:
-        p = SoftwareProcess.objects.get(pk=software_process_id)
-    except Poll.DoesNotExist:
-        raise Http404
-    return render_to_response('methodology/detailswp.html', {'software_process': p},        
-                                       context_instance=RequestContext(request))
 
 
 ###################################################################################################

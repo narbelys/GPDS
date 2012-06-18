@@ -7,9 +7,9 @@ urlpatterns = patterns('',
     # Estos Url seran sustituidos por los News URL's
     url(r'^$', 'activity.views.indexact'),
     # Technique Index
-    url(r'^indextec/$', 'activity.views.indextec'),
+    #url(r'^indextec/$', 'activity.views.indextec'),
     # Technique Details
-    url(r'^indextec/(?P<technique_id>\d+)/$', 'activity.views.detailtec'),
+    #url(r'^indextec/(?P<technique_id>\d+)/$', 'activity.views.detailtec'),
     # Technique Create
     url(r'^indextec/add$', 'activity.views.addtec'),
     # Technique Update
