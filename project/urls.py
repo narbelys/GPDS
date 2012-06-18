@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
-urlpatterns = patterns('',    
+urlpatterns = patterns('',
     # Estos Url seran sustituidos por los News URL's
     url(r'^$', 'project.views.manage'),
     url(r'^(?P<project_id>\d+)/$', 'project.views.read'),
@@ -17,9 +17,9 @@ urlpatterns = patterns('',
     
     # News URL's for Project
     url(r'^manage_project/$', 'project.views.manage_project'),
-    url(r'^create_project/$', 'project.views.create_project'),
-    url(r'^read_project/(?P<project_id>\d+)/$', 'project.views.read_project'),
-    url(r'^update_project/$', 'project.views.update_project'),
-    url(r'^delete_project/$', 'project.views.delete_project'),
+    #url(r'^create_project/$', 'project.views.create_project'),
+    #url(r'^read_project/(?P<project_id>\d+)/$', 'project.views.read_project'),
+    #url(r'^update_project/$', 'project.views.update_project'),
+    #url(r'^delete_project/$', 'project.views.delete_project'),
     url(r'^quit_project/$', 'project.views.quit_project'),
 )
