@@ -16,7 +16,7 @@ class MethodologyCreateForm(ModelForm):
         model = Methodology
         fields = ('name', 'description', 'is_private', 'software_process')
 
-class MethodologyChangeForm(ModelForm):
+class MethodologyUpdateForm(ModelForm):
     class Meta:
         model = Methodology
         fields = ('name', 'description', 'is_private', 'software_process', 'owner', 'enabled')

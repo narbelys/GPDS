@@ -20,23 +20,27 @@ def indexact(request):
                                     {'latest_act_list': latest_act_list,}, 
                                     context_instance=RequestContext(request))
 
-# Technique Index
+# Manage Techniques
 @login_required 
-def indextec(request):
+def manage_technique(request):
     latest_tec_list = Technique.objects.all()
-    return render_to_response('activity/indextec.html',
-                                    {'latest_tec_list': latest_tec_list,}, 
-                                    context_instance=RequestContext(request))
+    return render_to_response('activity/manage_technique.html', 
+							{'latest_tec_list': latest_tec_list,}, 
+							context_instance=RequestContext(request))
 
-# Technique Details
+# Read Technique
+# FALTA: Poner que solo se muestren las tecnicas de la actividad actual!
 @login_required 
-def detailtec(request, technique_id):
+def read_technique(request, technique_id):
     try:
         p = Technique.objects.get(pk=technique_id)
     except Poll.DoesNotExist:
         raise Http404
-    return render_to_response('activity/detailtec.html', {'technique': p},
-                                   context_instance=RequestContext(request))
+    return render_to_response('activity/read_technique.html', 
+							{'technique': p},
+							context_instance=RequestContext(request))
+
+
 @login_required 
 def addtec(request):      
     if request.method == 'POST':

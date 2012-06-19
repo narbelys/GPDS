@@ -3,13 +3,24 @@
 {% block content %}
 
 {% if latest_meth_list %}
+<script type="text/javascript">
+	function delete_methodology(pagina) {
+		var opciones="toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=yes, width=508, height=365, top=85, left=140";
+		var agree=confirm('Esta seguro que desea eliminar la Metodologia?');
+			if (agree){
+				alert("Se ha deshabilitado la metodología");
+				window.location.assign(pagina)
+     			}
+		}
+</script>
     <ul>
     <h1> Metodologías Disponibles </h1>
     {% for methodology in latest_meth_list %}
     <li>              
-	<td><a href="/methodology/{{ methodology.id }}/">{{ methodology.name }}</a></td>
-        <td><a href="/methodology/change/{{ methodology.id }}/">Editar</a></td>
-        <td><a href="/methodology/delete/{{ methodology.id }}/">Eliminar</a></td>
+		<td><a href="/methodology/{{ methodology.id }}/">{{ methodology.name }}</a></td>
+        <td><a href="/methodology/update_methodology/{{ methodology.id }}/">Editar</a></td>
+		<td><a href="javascript:delete_methodology('/methodology/delete_methodology/{{ methodology.id }}/')">Eliminar</a></td>
+	
 </li>
     {% endfor %}
 	<br>
@@ -22,6 +33,6 @@
 
 <br>
 <br>
-<a href="/methodology/indexswp/">Procesos de Software</a>
+<a href="/methodology/manage_softwareprocess/">Procesos de Software</a>
 
 {% endblock %}

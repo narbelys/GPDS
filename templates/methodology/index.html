@@ -8,8 +8,8 @@
     {% for methodology in latest_meth_list %}
     <li>              
 	<td><a href="/methodology/{{ methodology.id }}/">{{ methodology.name }}</a></td>
-        <td><a href="/methodology/change/{{ methodology.id }}/">Editar</a></td>
-        <td><a href="/methodology/delete/{{ methodology.id }}/">Eliminar</a></td>
+        <td><a href="/methodology/update_methodology/{{ methodology.id }}/">Editar</a></td>
+        <td><a href="/methodology/delete_methodology/{{ methodology.id }}/">Eliminar</a></td>
 </li>
     {% endfor %}
 	<br>
