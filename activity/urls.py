@@ -36,6 +36,8 @@ urlpatterns = patterns('',
     url(r'^project/(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
     # Read Artifact
     url(r'^read_artifact/(?P<artifact_id>\d+)/$', 'activity.views.read_artifact'),
+    # Read Artifact
+    url(r'^update_artifact/(?P<artifact_id>\d+)/$', 'activity.views.update_artifact'),
     #Delete Artifact
     url(r'^delete_artifact/$', 'activity.views.delete_artifact'),      
     # Open Artifact

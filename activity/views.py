@@ -99,12 +99,14 @@ def create_artifact(request, project_id):
         return render_to_response('activity/create_artifact.html', {'act': act, 'tech':tec, 'form': form, 'msj':'Todos los campos son necesarios'}, context_instance=RequestContext(request))
 
 #Descargar artefacto
-@login_required     
-def download_artifact(request, artifact_id, activity_id): 
-    art = get_object_or_404(Artifact, pk=artifact_id)
-    (art.content).open()
-    return HttpResponse('holagatito')
-
+@login_required   
+def open_artifact(request,artifact_id):
+	art= get_object_or_404(Artifact, pk=artifact_id)    
+	path = art.content.path
+	wrapper = FileWrapper( file( path ) )
+	response = HttpResponse(wrapper, content_type='application/pdf')
+	response['Content-Length'] = os.path.getsize( path )
+	return response
 
 ###################################################################################################
 #                                Manage, CRUD for Activity                                        #
