@@ -43,7 +43,7 @@ def create_methodology(request):
         form = MethodologyCreateForm()
         return render_to_response('methodology/create_methodology.html',
                               {'form':form,
-                               'action': 'create',
+                               'action': 'create_methodology',
                                'button': 'Guardar'},
                               context_instance=RequestContext(request))
 
