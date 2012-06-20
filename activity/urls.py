@@ -19,7 +19,8 @@ urlpatterns = patterns('',
     
     # News URL's for Activity
     #url(r'^manage_activity/$', 'activity.views.manage_activity'),
-    #url(r'^create_activity/$', 'activity.views.create_activity'),
+    url(r'^create/$', 'activity.views.create_activity'),
+    url(r'^create_activity/$', 'activity.views.create_activity'),
     #url(r'^read_activity/(?P<activity_id>\d+)/$', 'activity.views.read_activity'),
     #url(r'^update_activity/$', 'activity.views.update_activity'),
     #url(r'^delete_activity/$', 'activity.views.delete_activity'),
@@ -37,7 +38,7 @@ urlpatterns = patterns('',
     # Read Artifact
     url(r'^read_artifact/(?P<artifact_id>\d+)/$', 'activity.views.read_artifact'),
     # Read Artifact
-    url(r'^update_artifact/(?P<artifact_id>\d+)/$', 'activity.views.update_artifact'),
+    #url(r'^update_artifact/(?P<artifact_id>\d+)/$', 'activity.views.update_artifact'),
     #Delete Artifact
    # url(r'^delete_artifact/$', 'activity.views.delete_artifact'),
     # Open Artifact

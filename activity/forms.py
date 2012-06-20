@@ -17,4 +17,8 @@ class upload_artifact(forms.Form):
     def get_fields(self):
         return self.cleaned_data
         
-        
+class ActivityCreateForm(ModelForm):
+    class Meta:
+        model = Activity
+        fields = ('name', 'description', 'progress', 'date_start','date_end','project','users','activities_required','activities_super','activities_successor','roles','software_process','techniques')
+

@@ -122,6 +122,21 @@ def open_artifact(request,artifact_id):
 # @login_required
 # def create_activity
 
+@login_required
+def create_activity(request):
+    if request.method == 'POST':
+        form = ActivityCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return indexact(request)
+    else:
+        form = ActivityCreateForm()
+        return render_to_response('activity/create_activity.html',
+                              {'form':form,
+                               'action': 'create_activity',
+                               'button': 'Guardar'},
+                              context_instance=RequestContext(request))
+
 # @login_required
 # def read_activity
 
