@@ -19,7 +19,7 @@ urlpatterns = patterns('',
     
     # News URL's for Activity
     url(r'^$', 'activity.views.manage_activity'),
-    #url(r'^manage_activity/$', 'activity.views.manage_activity'),
+    url(r'^manage_activity/$', 'activity.views.manage_activity'),
     url(r'^create/$', 'activity.views.create_activity'),
     url(r'^create_activity/$', 'activity.views.create_activity'),
     url(r'^read_activity/(?P<activity_id>\d+)/$', 'activity.views.read_activity'),

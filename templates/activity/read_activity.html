@@ -17,6 +17,15 @@
 		<li type="disc"> No se encuentran roles asociados. </li><br>
 	{% endif %}
 	<br>
+	{% if users %}
+		<li type="disc"> Encargados: </li>
+		{% for user in users %}
+			<li><a href="/users/read_user/{{ user.id }}/">	{{user}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No está a cargo de nadie. </li><br>
+	{% endif %}
+	<br>
 	{% if subacts %}
 		<li type="disc"> Subactividades que la componen: </li>
 		{% for sub in subacts %}

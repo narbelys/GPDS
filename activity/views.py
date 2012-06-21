@@ -1,6 +1,6 @@
 from django.template import Context, loader
 from activity.models import Activity, Artifact, Technique
-from users.models import Role
+from users.models import User, Role
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.http import Http404
@@ -48,15 +48,16 @@ def create_activity(request):
 
 # Read Activity
 # FALTA interpretar fecha y hora
-# FALTA mostrar usuarios involucrados
 @login_required
 def read_activity(request, activity_id):
 	try:
 		act = Activity.objects.get(pk = activity_id, enabled = True)
 		# Listar roles de actividad
 		roles = Role.objects.filter(activity = activity_id, enabled = True)
+		# Listar participantes de actividad
+		users = act.users.all()#.filter(enabled = True)
 		# Consultar actividades precedentes
-		required = act.activities_required.all()
+		required = act.activities_required.all().filter(enabled = True)
 		# Consultar actividades sucesoras
 		successor = Activity.objects.filter(activities_required = activity_id, enabled = True)
 		# Consultar subactividades
@@ -68,6 +69,7 @@ def read_activity(request, activity_id):
 	return render_to_response('activity/read_activity.html',
 							{'activity': act,
 							'roles':roles,
+							'users': users,
 							'required': required,
 							'successor': successor,
 							'subacts': subs,
@@ -105,6 +107,7 @@ def update_activity(request, activity_id):
 
 
 # Manage Techniques
+# NO SE USA: se ve directamente del Read Activity
 @login_required 
 def manage_technique(request, activity_id):
 	try:
