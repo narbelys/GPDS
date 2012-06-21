@@ -43,7 +43,7 @@ def create_methodology(request):
         form = MethodologyCreateForm()
         return render_to_response('methodology/create_methodology.html',
                               {'form':form,
-                               'action': 'create',
+                               'action': 'create_methodology',
                                'button': 'Guardar'},
                               context_instance=RequestContext(request))
 
@@ -86,7 +86,7 @@ def delete_methodology(request, methodology_id):
 # Manage Software Process
 @login_required
 def manage_softwareprocess(request):
-    latest_swp_list = SoftwareProcess.objects.all()
+    latest_swp_list = SoftwareProcess.objects.filter(enabled=True)
     return render_to_response('methodology/manage_softwareprocess.html',
 							{'latest_swp_list':latest_swp_list, },
 							context_instance=RequestContext(request))

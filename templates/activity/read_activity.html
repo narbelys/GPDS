@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ activity.name }}</h1><br>
+<ul>
+    <li type="disc"> Descripción: {{ activity.description }} </li><br>
+	<li type="disc"> Inicio: {{ activity.date_start }} </li><br>
+	<li type="disc"> Progreso actual: {{ activity.progress }}% </li><br>
+	<li type="disc"> Fin: {{ activity.date_end }} </li><br>
+	{% if roles %}
+		<li type="disc"> Roles implicados: </li>
+		{% for role in roles %}
+			<li><a href="/methodology/read_role/{{ role.id }}/">	{{role.name}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No se encuentran roles asociados. </li><br>
+	{% endif %}
+	<br>
+	{% if users %}
+		<li type="disc"> Encargados: </li>
+		{% for user in users %}
+			<li><a href="/users/read_user/{{ user.id }}/">	{{user}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No está a cargo de nadie. </li><br>
+	{% endif %}
+	<br>
+	{% if subacts %}
+		<li type="disc"> Subactividades que la componen: </li>
+		{% for sub in subacts %}
+			<li><a href="/activity/read_activity/{{ sub.id }}/">	{{sub.name}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No está compuesta por subactividades. </li>
+	{% endif %}
+	<br>
+	{% if required %}
+		<li type="disc"> Actividades precedentes: </li>
+		{% for req in required %}
+			<li><a href="/activity/read_activity/{{ req.id }}/">	{{req.name}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No posee actividades precedentes </li>
+	{% endif %}
+	<br>
+	{% if successor %}
+		<li type="disc"> Actividades sucesoras: </li>
+		{% for suc in successor %}
+			<li><a href="/activity/read_activity/{{ suc.id }}/">	{{suc.name}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No posee actividades sucesoras </li>
+	{% endif %}
+	<br>
+	{% if techniques %}
+		<li type="disc"> Técnicas asociadas: </li>
+		{% for tech in techniques %}
+			<li><a href="/activity/read_technique/{{ tech.id }}/">	{{tech.name}}</a></li>
+		{% endfor %}
+	{% else %}
+		<li type="disc"> No posee técnicas asociadas </li>
+	{% endif %}
+	<br>
+</ul>
+<br>
+<a href="/activity/manage_activity/"> Volver a actividades </a>
+
+{% endblock %}

@@ -24,14 +24,14 @@ def manage(request):
                                     {'latest_project_list': latest_project_list,}, 
                                     context_instance=RequestContext(request))   
 
-@login_required
-def read(request, project_id):
-    try:
-        p = Project.objects.get(pk=project_id)
-    except Poll.DoesNotExist:
-        raise Http404
-    return render_to_response('project/read.html', {'project': p},
-                                   context_instance=RequestContext(request))
+#@login_required
+#def read(request, project_id):
+#    try:
+#        p = Project.objects.get(pk=project_id)
+#    except Poll.DoesNotExist:
+#        raise Http404
+#    return render_to_response('project/read.html', {'project': p},
+#                                   context_instance=RequestContext(request))
 
 @login_required
 def create(request):
@@ -98,8 +98,15 @@ def manage_project(request):
 # @login_required
 # def create_project
 
-# @login_required
-# def read_project
+@login_required
+def read_project(request,project_id):
+    try:
+        p = Project.objects.get(pk=project_id)
+    except Poll.DoesNotExist:
+        raise Http404
+    return render_to_response('project/read_project.html', {'project': p},
+                                context_instance=RequestContext(request))
+     
 
 # @login_required
 # def update_project

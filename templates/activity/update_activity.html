@@ -2,15 +2,19 @@
 
 {% block content %}
 
+{% if message %}
+ <b>{{ message }}</b>
+ <p>
+ {% endif %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="/methodology/update_methodology/{{ methodology_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
+<form action="/activity/update_activity/{{ activity_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
 	{% csrf_token %}
 	<table>
 	{{ form.as_table }}
 	</table>
 	<a href="/activity/"> Regresar </a>
-	<input type="submit" value="Update" />
+	<input type="submit" value="Actualizar" />
 </form>
 
 {% endblock %}
