@@ -28,6 +28,7 @@ class SoftwareProcess(models.Model):
     description = models.TextField()
     kind = models.CharField(max_length=2, choices=TYPE_CHOICES, default='CA')
     roles = models.ManyToManyField(Role)
+    enabled = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name

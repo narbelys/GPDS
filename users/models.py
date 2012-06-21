@@ -5,6 +5,7 @@ from django.db import models
 class Role(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField()
+    enabled = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name
@@ -14,6 +15,7 @@ class Membership(models.Model):
     project = models.ForeignKey('project.Project')
     role = models.ForeignKey(Role,null=True, blank=True)
     date_joined = models.DateField()
+    enabled = models.BooleanField(default=True)
 
 from project.models import Project
 
