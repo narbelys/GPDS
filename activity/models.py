@@ -14,9 +14,10 @@ class Activity(models.Model):
     date_end = models.DateTimeField('date ended')
     project = models.ForeignKey(Project)
     users = models.ManyToManyField(User,null=True, blank=True)
-    activities_required = models.ManyToManyField('self',null=True, blank=True)
+    activities_required = models.ManyToManyField('Activity',null=True, blank=True)
     activities_super = models.ManyToManyField('self',null=True, blank=True)
-    activities_successor = models.ManyToManyField('self',null=True, blank=True)
+    # activities_successor es redundante y genera problemas 
+    #activities_successor = models.ManyToManyField('self',null=True, blank=True)
     roles = models.ManyToManyField(Role)
     software_process = models.ForeignKey(SoftwareProcess)
     techniques = models.ManyToManyField('Technique')
@@ -31,6 +32,7 @@ class Artifact(models.Model):
     content = models.FileField(upload_to='artifacts')
     activity = models.ForeignKey('Activity')
     technique = models.ForeignKey('Technique')
+    enabled = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name
@@ -38,6 +40,7 @@ class Artifact(models.Model):
 class Technique(models.Model):
     name = models.CharField(max_length=30, unique=True)
     description = models.TextField()
+    enabled = models.BooleanField(default=True)
     
     def __unicode__(self):
         return self.name

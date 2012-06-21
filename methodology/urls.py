@@ -28,7 +28,7 @@ urlpatterns = patterns('',
     url(r'^read_softwareprocess/(?P<softwareprocess_id>\d+)/$', 'methodology.views.read_softwareprocess'),
     
     # News URL's for Role
-   # url(r'^manage_role/$', 'methodology.views.manage_role'),
-  #  url(r'^read_role/(?P<role_id>\d+)/$', 'methodology.views.read_role'),
+    #url(r'^manage_role/$', 'methodology.views.manage_role'),
+    #url(r'^read_role/(?P<role_id>\d+)/$', 'methodology.views.read_role'),
 )
 
