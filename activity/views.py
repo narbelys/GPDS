@@ -12,20 +12,13 @@ from models import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required, login_required, permission_required
 
-# Index de Actividad
-@login_required 
-def indexact(request):
-    latest_act_list = Activity.objects.all()
-    return render_to_response('activity/indexact.html',
-                                    {'latest_act_list': latest_act_list,}, 
-                                    context_instance=RequestContext(request))
 
 # Manage Techniques
 @login_required 
 def manage_technique(request):
     latest_tec_list = Technique.objects.all()
-    return render_to_response('activity/manage_technique.html', 
-							{'latest_tec_list': latest_tec_list,}, 
+    return render_to_response('activity/manage_technique.html',
+							{'latest_tec_list': latest_tec_list, },
 							context_instance=RequestContext(request))
 
 # Read Technique
@@ -34,9 +27,9 @@ def manage_technique(request):
 def read_technique(request, technique_id):
     try:
         p = Technique.objects.get(pk=technique_id)
-    except Poll.DoesNotExist:
+    except p.DoesNotExist:
         raise Http404
-    return render_to_response('activity/read_technique.html', 
+    return render_to_response('activity/read_technique.html',
 							{'technique': p},
 							context_instance=RequestContext(request))
 
@@ -50,23 +43,23 @@ def addtec(request):
             return detailtec(request, technique_id=technique.id)
     else:
         form = TechniqueForm()
-    return render_to_response('activity/formtec.html', 
+    return render_to_response('activity/formtec.html',
                               {'form':form,
                                'action': 'add',
                                'button': 'Agregar'},
                               context_instance=RequestContext(request))
 
 @login_required                              
-def updatetec(request,technique_id):
+def updatetec(request, technique_id):
     tect = Technique.objects.get(id=technique_id)
     if request.method == 'POST':
-        form = TechniqueForm(request.POST,instance=tect)
+        form = TechniqueForm(request.POST, instance=tect)
         if form.is_valid():
             technique = form.save()
             return detailtec(request, technique_id=technique.id)
     else:
         form = TechniqueForm(instance=tect)
-    return render_to_response('activity/formtec.html', 
+    return render_to_response('activity/formtec.html',
                               {'form':form,
                                'action': 'update/' + technique_id + '/',
                                'button': 'Actualizar'},
@@ -104,12 +97,12 @@ def create_artifact(request, project_id):
 
 #Descargar artefacto
 @login_required   
-def open_artifact(request,artifact_id):
-	art= get_object_or_404(Artifact, pk=artifact_id)    
+def open_artifact(request, artifact_id):
+	art = get_object_or_404(Artifact, pk=artifact_id)    
 	path = art.content.path
-	wrapper = FileWrapper( file( path ) )
+	wrapper = FileWrapper(file(path))
 	response = HttpResponse(wrapper, content_type='application/pdf')
-	response['Content-Length'] = os.path.getsize( path )
+	response['Content-Length'] = os.path.getsize(path)
 	return response
 
 ###################################################################################################
@@ -118,7 +111,12 @@ def open_artifact(request,artifact_id):
 
 # @login_required
 # def manage_activity
-
+@login_required 
+def manage_activity(request):
+    latest_act_list = Activity.objects.all()
+    return render_to_response('activity/manage_activity.html',
+                                    {'latest_act_list': latest_act_list, },
+                                    context_instance=RequestContext(request))
 # @login_required
 # def create_activity
 
@@ -128,7 +126,7 @@ def create_activity(request):
         form = ActivityCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return indexact(request)
+            return manage_activity(request)
     else:
         form = ActivityCreateForm()
         return render_to_response('activity/create_activity.html',
@@ -142,7 +140,23 @@ def create_activity(request):
 
 # @login_required
 # def update_activity
-
+@login_required
+def update_activity(request, activity_id):    
+    
+    if request.method == 'POST':
+        form = ActivityUpdateForm(request.POST, instance=Activity.objects.get(pk=activity_id))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('activity.views.manage_activity', args=()))
+        
+    else:
+        form = ActivityUpdateForm(instance=Activity.objects.get(pk=activity_id))
+        redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('activity/update_activity.html',
+                              {'form':form,
+                               'next':redirect_to,
+                               'activity_id':activity_id},
+                              context_instance=RequestContext(request))
 # @login_required
 # def delete_activity
 
