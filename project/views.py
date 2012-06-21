@@ -92,7 +92,12 @@ def manage_project(request):
     for project_aux in projects_aux:
         if (project_aux.enabled):
             projects.add(project_aux)
-    return render_to_response('project/manage_project.html', {'projects':projects},
+    projects_aux2 = Project.objects.filter(leader__id=request.user.id)
+    projects2 = Set([])
+    for project_aux2 in projects_aux2:
+        if (project_aux2.enabled):
+            projects2.add(project_aux)
+    return render_to_response('project/manage_project.html', {'projects':projects, 'projects2':projects2},
                               context_instance=RequestContext(request))
 
 # @login_required
