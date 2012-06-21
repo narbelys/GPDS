@@ -86,7 +86,7 @@ def delete_methodology(request, methodology_id):
 # Manage Software Process
 @login_required
 def manage_softwareprocess(request):
-    latest_swp_list = SoftwareProcess.objects.get(enabled=True)
+    latest_swp_list = SoftwareProcess.objects.filter(enabled=True)
     return render_to_response('methodology/manage_softwareprocess.html',
 							{'latest_swp_list':latest_swp_list, },
 							context_instance=RequestContext(request))
