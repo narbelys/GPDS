@@ -11,14 +11,16 @@
 
 {% for p in projects %}
 
-<a href="/project/read_project/{{ p.project.id }}/"> {{ p.name }} </a>
-</br>
+<a href="/project/read_project/{{p.id}}/"> {{ p.name }} </a></br>
 
 {% endfor %}
 
 {% else %}
 	Usted no pertenece a ningun proyecto.
 {% endif %}
+<br/>
+<a href="/project/create/">Crear Nuevo Proyecto</a>
+
 
 </div>
 
