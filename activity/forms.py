@@ -17,4 +17,11 @@ class upload_artifact(forms.Form):
     def get_fields(self):
         return self.cleaned_data
         
-        
+class update_artifactForm(forms.Form):
+    name = forms.CharField(max_length=30)
+    description = forms.CharField(widget=forms.Textarea)
+    activity = forms.CharField(max_length=30)
+    technique = forms.CharField(max_length=30)
+    
+    def get_fields(self):
+        return self.cleaned_data           

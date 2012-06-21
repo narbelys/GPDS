@@ -11,6 +11,8 @@ from forms import *
 from models import *
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.decorators import login_required, login_required, permission_required
+from django.core.servers.basehttp import FileWrapper
+import os
 
 # Index de Actividad
 @login_required 
@@ -72,7 +74,7 @@ def updatetec(request,technique_id):
                                'button': 'Actualizar'},
                               context_instance=RequestContext(request))
 
-#Consultar artefacto
+#Consultar artefacto, por actividad
 @login_required 
 def read_artifact(request, activity_id):
     p = get_object_or_404(Activity, pk=activity_id)
@@ -94,7 +96,7 @@ def create_artifact(request, project_id):
         f = form.get_fields()
         art = Artifact(name=f['name'], description=f['description'], content=request.FILES['content'], activity=(Activity.objects.get(name__exact=f['activity'])), technique=(Technique.objects.get(name__exact=f['technique'])))
         art.save()
-        return render_to_response('activity/home.html', {}, context_instance=RequestContext(request))
+        return render_to_response('home.html', {}, context_instance=RequestContext(request))
     else:
         p = get_object_or_404(Project, pk=project_id)
         act = Activity.objects.filter(project__exact=p.id)
@@ -102,15 +104,36 @@ def create_artifact(request, project_id):
         form = upload_artifact()    
         return render_to_response('activity/create_artifact.html', {'act': act, 'tech':tec, 'form': form, 'msj':'Todos los campos son necesarios'}, context_instance=RequestContext(request))
 
+#Actualizar artefacto
+@login_required
+def update_artifact(request,artifact_id):
+    a = get_object_or_404(Artifact, pk=artifact_id)            
+    if request.method == 'GET':
+        print a
+        act = Activity.objects.all()
+        tec = Technique.objects.all()
+        form = update_artifactForm()   
+        return render_to_response('activity/update_artifact.html', {'act': act,'tech':tec,'form': form, 'art':a},context_instance = RequestContext(request))
+    form =update_artifactForm(request.POST)  
+    if form.is_valid():
+        art = form.get_fields()
+        a.name = art['name']
+        a.description = art['description']
+        a.activity= Activity.objects.get(name__exact = art['activity'])
+        a.technique=Technique.objects.get(name__exact = art ['technique'])
+        a.save()
+        return render_to_response('home.html', {}, context_instance= RequestContext(request))
+    else: HttpResponse('No se pudo actualizar') 
+    
 #Descargar artefacto
 @login_required   
 def open_artifact(request,artifact_id):
-	art= get_object_or_404(Artifact, pk=artifact_id)    
-	path = art.content.path
-	wrapper = FileWrapper( file( path ) )
-	response = HttpResponse(wrapper, content_type='application/pdf')
-	response['Content-Length'] = os.path.getsize( path )
-	return response
+    art= get_object_or_404(Artifact, pk=artifact_id)    
+    path = art.content.path
+    wrapper = FileWrapper( file( path ) )
+    response = HttpResponse(wrapper, content_type='application/pdf')
+    response['Content-Length'] = os.path.getsize( path )
+    return response
 
 ###################################################################################################
 #                                Manage, CRUD for Activity                                        #
