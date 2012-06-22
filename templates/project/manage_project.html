@@ -24,8 +24,9 @@
 
         {% for p in projects2 %}
 
-            <a href="/project/read_project/{{p.id}}/"> {{ p.name }} </a></br>
-
+            <a href="/project/read_project/{{p.id}}/"> {{ p.name }} </a>
+	        <td><a href="/project/update/{{ project.id }}/">Editar</a></td>
+	        <td><a href="/project/delete/{{ project.id }}/">Eliminar</a></td></br>
         {% endfor %}
 
 {% else %}
