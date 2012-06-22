@@ -70,7 +70,12 @@
 	                			<a href="/users/logout/">Logout</a>
 	                	{% endif %}
                 	</div>
-                
+                	<BR>
+                 <form action="/users/find_anywhere/" method="post">
+                 {% csrf_token %}
+            		Buscar: <input type="text" name="find" id="find"/>
+            	<input type="submit" value="Buscar" />
+        		</form>	
                 </div>
                 <div class="clear"></div>
                 <div class="navig">
