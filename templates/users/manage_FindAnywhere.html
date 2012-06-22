@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if latest_meth_list %}
+
+{% csrf_token %}
+
+    <ul>
+    <h1> Metodologías Disponibles </h1>
+        
+{% for methodology in latest_meth_list %}    
+    <li>              
+		<td><a href="/methodology/{{ methodology.id }}/">{{ methodology }}</a></td>	 
+	</li>
+
+{% endfor %}    
+
+{% else %}
+
+<h1> No se encontraron valores </h1>
+            
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
