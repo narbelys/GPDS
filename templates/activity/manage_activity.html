@@ -14,7 +14,7 @@
 		<tr bgcolor="{% cycle FFFFFF,EEEEEE as rowcolor %}">
 			<td><a href="/activity/read_activity/{{ act.id }}/"> {{ act.name }} </a></td>
 			<td><a href="/activity/update_activity/{{ act.id }}/">	Editar</a></td>
-            <td><a href="{{ act.id }}/artifacts">	Ver Artefactos</a></td>
+            <td><a href="/activity/read_artifact/{{ act.id }}/">	Ver Artefactos</a></td>
         </tr>
 		<Br>
 	</li>
