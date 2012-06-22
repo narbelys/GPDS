@@ -4,10 +4,15 @@
 
 
 <form action="/project/edit/{{ project_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
-	{% csrf_token %}
-	<table>
-	{{ form.as_table }}
-	</table>
+<ul>
+    Descripción: {{ project.description }}<br>
+    Fecha de Inicio: {{ project.date_start }}<br>
+    Fecha de Culminación: {{ project.date_end }}<br>
+    Costo del Proyecto: {{ project.cost }}<br>
+    Area del Proyecto: {{ project.area }}<br>
+    Metodología del Proyecto: {{ project.methodology.name }}<br>
+    Lider del Proyecto: {{ project.leader }}<br>
+</ul>
 	<input type="submit" value="Update" />
 </form>
 

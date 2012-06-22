@@ -24,45 +24,21 @@ def manage(request):
                                     {'latest_project_list': latest_project_list,}, 
                                     context_instance=RequestContext(request))   
 
-#@login_required
-#def read(request, project_id):
-#    try:
-#        p = Project.objects.get(pk=project_id)
-#    except Poll.DoesNotExist:
-#        raise Http404
-#    return render_to_response('project/read.html', {'project': p},
-#                                   context_instance=RequestContext(request))
 
 @login_required
-def create(request):
+def create_project(request):
     if request.method == 'POST':
         form = ProjectCreateForm(request.POST)
         if form.is_valid():
             form.save()
         latest_project_list = Project.objects.all()
-        return render_to_response('project/manage.html', {'latest_project_list': latest_project_list},
+        return render_to_response('project/manage_project.html', {'latest_project_list': latest_project_list},
                                    context_instance=RequestContext(request))
     else:
         form = ProjectCreateForm(request.POST)
-        return render_to_response('project/create.html', {'form':form}, context_instance=RequestContext(request))
+        return render_to_response('project/create_project.html', {'form':form}, context_instance=RequestContext(request))
 
 
-@login_required
-def update(request, project_id):
-    if request.method == 'POST':
-        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
-        redirect_to = request.REQUEST.get('next', reverse('project.views.manage', args=()))
-        if form.is_valid():
-            form.save()
-        return HttpResponseRedirect(reverse('project.views.manage', args=()))
-    else:
-        form = ProjectChangeForm(instance=Project.objects.get(pk=project_id))
-        redirect_to = request.REQUEST.get('next', '')
-    return render_to_response('project/update.html',
-                              {'form':form,
-                               'next':redirect_to,
-                               'project_id':project_id},
-                              context_instance=RequestContext(request))
 
 @login_required 
 def delete(request, project_id):
@@ -113,8 +89,23 @@ def read_project(request,project_id):
                                 context_instance=RequestContext(request))
      
 
-# @login_required
-# def update_project
+@login_required
+def update_project(request, project_id):
+    if request.method == 'POST':
+        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.manage_project', args=()))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('project.views.manage_project', args=()))
+    else:
+        form = ProjectChangeForm(instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('project/update_project.html',
+                              {'form':form,
+                               'next':redirect_to,
+                               'project_id':project_id},
+                                 context_instance=RequestContext(request))
+
 
 # @login_required
 # def delete_project

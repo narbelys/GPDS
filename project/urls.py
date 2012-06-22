@@ -8,8 +8,8 @@ urlpatterns = patterns('',
     # Estos Url seran sustituidos por los News URL's
     #url(r'^$', 'project.views.manage'),
     #url(r'^(?P<project_id>\d+)/$', 'project.views.read'),
-    url(r'^create/$', 'project.views.create'),
-    url(r'^update/(?P<project_id>\d+)/$', 'project.views.update'),
+    #url(r'^create/$', 'project.views.create'),
+    #url(r'^update/(?P<project_id>\d+)/$', 'project.views.update'),
     url(r'^delete/(?P<project_id>\d+)/$', 'project.views.delete'),
     url(r'^(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
     
@@ -17,9 +17,9 @@ urlpatterns = patterns('',
     
     # News URL's for Project
     url(r'^$', 'project.views.manage_project'),
-    #url(r'^create_project/$', 'project.views.create_project'),
+    url(r'^create_project/$', 'project.views.create_project'),
     url(r'^read_project/(?P<project_id>\d+)/$', 'project.views.read_project'),
-    #url(r'^update_project/$', 'project.views.update_project'),
+    url(r'^update_project/(?P<project_id>\d+)/$', 'project.views.update_project'),
     #url(r'^delete_project/$', 'project.views.delete_project'),
     url(r'^quit_project/$', 'project.views.quit_project'),
 )

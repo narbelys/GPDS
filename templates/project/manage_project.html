@@ -25,15 +25,15 @@
         {% for p in projects2 %}
 
             <a href="/project/read_project/{{p.id}}/"> {{ p.name }} </a>
-	        <td><a href="/project/update/{{ project.id }}/">Editar</a></td>
-	        <td><a href="/project/delete/{{ project.id }}/">Eliminar</a></td></br>
+	        <td><a href="/project/update_project/{{p.id}}/">Editar</a></td>
+	        <td><a href="/project/delete/{{p.id}}/">Eliminar</a></td></br>
         {% endfor %}
 
 {% else %}
 	Usted no es lider de ningun proyecto.
 {% endif %}
 <br/>
-<a href="/project/create/">Crear Nuevo Proyecto</a>
+<a href="/project/create_project/">Crear Nuevo Proyecto</a>
 
 
 </div>
