@@ -16,7 +16,7 @@ from django.contrib.auth.decorators import login_required, login_required, permi
 
 @login_required
 def manage_methodology(request):
-    latest_meth_list = Methodology.objects.all()
+    latest_meth_list = Methodology.objects.filter(enabled=True)
     return render_to_response('methodology/manage_methodology.html',
                                     {'latest_meth_list': latest_meth_list, },
                                     context_instance=RequestContext(request))
