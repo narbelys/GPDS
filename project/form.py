@@ -19,8 +19,14 @@ class ProjectCreateForm(ModelForm):
 class ProjectChangeForm(ModelForm):
     class Meta:
         model = Project
-        fields = ('description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'participants')
+        fields = ('description', 'date_start', 'date_end', 'cost', 'area', 'methodology', )
         
+class ProjectManageParticipants(ModelForm):
+    class Meta:
+        model = Project
+        fields = ('participants', )
+        
+
 class ProjectDeleteForm(ModelForm):
     class Meta:
         model = Project

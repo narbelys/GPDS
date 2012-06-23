@@ -115,3 +115,22 @@ def quit_project(request,project_id):
     memberships = Membership.objects.filter(user_id=request.user.id,project_id=request.POST['project_id'])
     memberships.delete()
     return HttpResponseRedirect(reverse('project.views.manage_project', args=()))
+
+
+#FALTA POR TERMIANR Y PROBAR
+@login_required
+def list_participants(request,project_id):
+    if request.method == 'POST':
+        form = ProjectChangeForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.manage_project', args=()))
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('project.views.manage_project', args=()))
+    else:
+        form = ProjectChangeForm(instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('project/update_project.html',
+                              {'form':form,
+                               'next':redirect_to,
+                               'project_id':project_id},
+                                 context_instance=RequestContext(request))    

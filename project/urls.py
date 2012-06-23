@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^update_project/(?P<project_id>\d+)/$', 'project.views.update_project'),
     #url(r'^delete_project/$', 'project.views.delete_project'),
     url(r'^quit_project/$', 'project.views.quit_project'),
+    url(r'^list_participants/(?P<project_id>\d+)/$','project.view.list_participants'),
 )
