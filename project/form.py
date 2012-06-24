@@ -9,7 +9,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
-
+from users.models import Membership
 
 class ProjectCreateForm(ModelForm):
     class Meta:
@@ -31,3 +31,9 @@ class ProjectDeleteForm(ModelForm):
     class Meta:
         model = Project
         exclude = ('name','description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', 'participants')
+
+class MembershipCreateForm(ModelForm):
+    class Meta:
+        model = Membership
+        fields = ('user', 'role','date_joined','enabled',)
+

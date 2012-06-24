@@ -26,7 +26,8 @@
 
             <a href="/project/read_project/{{p.id}}/"> {{ p.name }} </a>
 	        <td><a href="/project/update_project/{{p.id}}/">Editar</a></td>
-	        <td><a href="/project/delete/{{p.id}}/">Eliminar</a></td></br>
+            <td><a href="/project/manage_participants/{{p.id}}/">Gestionar Participantes</a></td>
+	        <td><a href="/project/delete_project/{{p.id}}/">Eliminar</a></td></br>
         {% endfor %}
 
 {% else %}

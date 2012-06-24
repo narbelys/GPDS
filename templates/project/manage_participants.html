@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<form action="/project/manage_participants/{{ project_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
+	{% csrf_token %}
+	<table>
+	{{ form.as_table }}
+	</table>
+    <br/>
+    <a href="/project/invitePart/">Invitar Participantes</a>
+    <br/>    
+    <br/>
+	<input type="submit" value="Guardar" />
+</form>
+
+{% endblock %}
