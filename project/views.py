@@ -40,16 +40,24 @@ def create_project(request):
     if request.method == 'POST':
         form = ProjectCreateForm(request.POST)
         if form.is_valid():
+#            for p in form.participants:
+#                form2.user = p
+#                form2.role             
+                #p = form.participants;
             form.save()
-        form2 = MembershipCreateForm(request.POST)
-        if form2.is_valid():
-            form2.save()
         latest_project_list = Project.objects.all()
         return render_to_response('project/manage_project.html', {'latest_project_list': latest_project_list},
                                    context_instance=RequestContext(request))
+ 
+#        form2 = MembershipCreateForm(request.POST)
+#    elif (request.method == 'POST2'):
+#        if form2.is_valid():
+#            form2.save()
+#        return render_to_response()
     else:
         form = ProjectCreateForm(request.POST)
-        return render_to_response('project/create_project.html', {'form':form}, context_instance=RequestContext(request))
+        form2 = MembershipCreateForm(request.POST)
+        return render_to_response('project/create_project.html', {'form':form, 'form2':form2,}, context_instance=RequestContext(request))
 
 @login_required
 def read_project(request,project_id):
