@@ -14,7 +14,7 @@ from users.models import Membership
 class ProjectCreateForm(ModelForm):
     class Meta:
         model = Project
-        fields = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', 'participants')
+        fields = ('name', 'description', 'date_start', 'date_end', 'cost', 'area', 'methodology', 'leader', )
 
 class ProjectChangeForm(ModelForm):
     class Meta:
@@ -35,5 +35,5 @@ class ProjectDeleteForm(ModelForm):
 class MembershipCreateForm(ModelForm):
     class Meta:
         model = Membership
-        fields = ('user', 'role','date_joined','enabled',)
+        fields = ('project','user', 'role','date_joined','enabled',)
 

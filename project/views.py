@@ -40,20 +40,10 @@ def create_project(request):
     if request.method == 'POST':
         form = ProjectCreateForm(request.POST)
         if form.is_valid():
-#            for p in form.participants:
-#                form2.user = p
-#                form2.role             
-                #p = form.participants;
             form.save()
         latest_project_list = Project.objects.all()
         return render_to_response('project/manage_project.html', {'latest_project_list': latest_project_list},
                                    context_instance=RequestContext(request))
- 
-#        form2 = MembershipCreateForm(request.POST)
-#    elif (request.method == 'POST2'):
-#        if form2.is_valid():
-#            form2.save()
-#        return render_to_response()
     else:
         form = ProjectCreateForm(request.POST)
         form2 = MembershipCreateForm(request.POST)
@@ -114,17 +104,28 @@ def quit_project(request,project_id):
 #FALTA POR TERMIANR Y PROBAR
 @login_required
 def manage_participants(request,project_id):
+    redirect_to = request.REQUEST.get('next', '')
+    return render_to_response('project/manage_participants.html',
+                              {'next':redirect_to,
+                               'project_id':project_id},
+                                 context_instance=RequestContext(request))
+    
+@login_required
+def add_participant_project(request,project_id):
     if request.method == 'POST':
-        form = ProjectManageParticipants(request.POST, instance=Project.objects.get(pk=project_id))
-        redirect_to = request.REQUEST.get('next', reverse('project.views.manage_project', args=()))
+        form = MembershipCreateForm(request.POST, instance=Project.objects.get(pk=project_id))
+        redirect_to = request.REQUEST.get('next', reverse('project.views.manage_participants', args=()))
         if form.is_valid():
             form.save()
-        return HttpResponseRedirect(reverse('project.views.manage_project', args=()))
+        return HttpResponseRedirect(reverse('project.views.manage_participants', args=()))
     else:
-        form = ProjectManageParticipants(instance=Project.objects.get(pk=project_id))
+        #projects_obj = Project.objects.filter( name = 'proj1')
+        form = MembershipCreateForm(instance=Project.objects.get(pk=project_id))
         redirect_to = request.REQUEST.get('next', '')
-    return render_to_response('project/manage_participants.html',
-                              {'form':form,
+
+    return render_to_response('project/add_participant_project.html',
+                              {'form':form, 'projects_obj':projects_obj,
                                'next':redirect_to,
                                'project_id':project_id},
                                  context_instance=RequestContext(request))    
+
