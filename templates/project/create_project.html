@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+        <h1>Nuevo Proyecto</h1>
+
+        <form action="" method="POST" >
+	        {% csrf_token %}
+	        <table>
+	        {{ form.as_table }}
+	        </table>
+	        <input type="submit" value="Crear" />
+        </form> 
+{% else %}
+        <p>Primero debe iniciar sesión</p>
+{% endif %}
+
+{% endblock %}
+         

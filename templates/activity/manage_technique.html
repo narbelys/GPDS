@@ -2,17 +2,22 @@
 
 {% block content %}
 
-{% if latest_tec_list %}
+{% if act.techniques %}
     <ul>
-    <h1> Técnicas Disponibles </h1>
-    {% for technique in latest_tec_list %}
-        <li>{{ technique.name }}
-        <a href="/activity/read_technique/{{ technique.id }}/"> Consultar </a>
-        <a href="/activity/indextec/update/{{ technique.id }}/"> Editar </a></li>
+    <h1> Técnicas Disponibles para esta actividad </h1>
+	<br>
+    {% for technique in act.techniques %}
+	<li type="disc">
+		<a href="/activity/read_technique/{{ technique.id }}/"> {{ technique.name }} </a></td>
+        <a href="/activity/indextec/update/{{ technique.id }}/"> Editar </a></td>
+		<br>
+	</li>
     {% endfor %}
     </ul>
 {% else %}
     <h1> Ninguna Técnica Disponible </h1>
+	<br>
 {% endif %}
- <a href='/activity/indextec/add'>Agregar Técnica</a>
+<br>
+<a href='/activity/indextec/add'>Agregar Técnica</a>
 {% endblock %}

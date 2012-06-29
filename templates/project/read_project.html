@@ -2,8 +2,7 @@
 
 {% block content %}
 
-
-<form action="/project/edit/{{ project_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
+<h1>{{ project.name }}</h1>
 <ul>
     Descripción: {{ project.description }}<br>
     Fecha de Inicio: {{ project.date_start }}<br>
@@ -12,8 +11,7 @@
     Area del Proyecto: {{ project.area }}<br>
     Metodología del Proyecto: {{ project.methodology.name }}<br>
     Lider del Proyecto: {{ project.leader }}<br>
+    <a href="/project/"> Regresar </a>
 </ul>
-	<input type="submit" value="Update" />
-</form>
 
 {% endblock %}
