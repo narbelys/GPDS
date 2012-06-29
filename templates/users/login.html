@@ -3,8 +3,6 @@
 
 {% block content %}
 
-<div class="container">
-
 {% if form.errors %}
 
 <p>Nombre de usuario o contrasena incorrectos. Por favor intente de nuevo!.</p>
@@ -20,8 +18,6 @@
 <input type="submit" value="login" class="mybutton"/>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
-
-</div>
 
 {% endblock %}
 	

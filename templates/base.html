@@ -70,7 +70,12 @@
 	                			<a href="/users/logout/">Logout</a>
 	                	{% endif %}
                 	</div>
-                
+            	    <div class="form-search">
+        				<form id="form-search" method="post">
+          					<input type="text" value="Type here..." onBlur="if(this.value=='') this.value='Type here...'" onFocus="if(this.value =='Type here...' ) this.value=''"  />
+          					<a href="#" onClick="document.getElementById('form-search').submit()" class="search_button"></a>
+        				</form>
+    				</div>  
                 </div>
                 <div class="clear"></div>
                 <div class="navig">
@@ -79,7 +84,7 @@
                         <p onclick="window.location='/'">Gestion de Proyectos <span class="green"> de Desarrollo de Software</span></p>
                      </div>
                     <div class="search">
-                        <div class="supp"><a target="_blank" href="/tutorial">Tutorial</a>&nbsp;|&nbsp;<a target="_blank" href="/support">Soporte</a>&nbsp;|&nbsp;<a target="_blank" href="/help">Ayuda</a></div>
+                        <div class="supp"><a target="_blank" href="/tutorial">Tutorial</a>&nbsp;|&nbsp;<a target="_blank" href="/support">Soporte</a>&nbsp;|&nbsp;<a target="_blank" href="/help">Ayuda</a></div> 
                         <div class="clear"></div>
                     </div>
                 </div> 
@@ -91,7 +96,9 @@
             	
 	            	<div class="slider">
 		                <ul class="items">
-		                    <li><img src="{% static "images/projects/roman_bridge.jpg" %}" alt="" /><div class="banner">Crea, organiza y gestiona tus proyectos&nbsp;</div></li>
+		                	<li><img src="{% static "images/projects/segovia_aqueduct_1.jpg" %}" alt="" /><div class="banner">Crea, organiza y gestiona tus proyectos&nbsp;</div></li>
+		                    <li><img src="{% static "images/projects/segovia_aqueduct_2.jpg" %}" alt="" /><div class="banner">Pa' lante comandante&nbsp;</div></li>
+		                    <li><img src="{% static "images/projects/segovia_aqueduct_3.jpg" %}" alt="" /><div class="banner">Para vivir viviendo&nbsp;</div></li>
 		                    <li><img src="{% static "images/projects/software_design_1.jpg" %}" alt="" /><div class="banner">Elige una metodologia o crea una propia&nbsp;</div></li>
 		                    <li><img src="{% static "images/projects/software_team.jpg" %}" alt="" /><div class="banner">Desarrolla tus actividades&nbsp;</div></li>
 		                </ul>
@@ -103,9 +110,11 @@
 	</div>
 	<div class="grey">
 		<div class="center">
+			<div class="container">
 			{% block content %}
 			
 			{% endblock %}
+			</div>
             <div class="linrr"></div>
 			<div class="linr"><br><img src="{% static "images/09.png" %}" alt="img"></div>
             <div class="clear"></div>
