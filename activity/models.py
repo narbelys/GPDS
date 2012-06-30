@@ -15,7 +15,7 @@ class Activity(models.Model):
     project = models.ForeignKey(Project)
     users = models.ManyToManyField(User,null=True, blank=True)
     activities_required = models.ManyToManyField('Activity',null=True, blank=True)
-    activities_super = models.ManyToManyField('self',null=True, blank=True)
+    activities_super = models.ManyToManyField('Activity',null=True, blank=True, related_name='activity_set_super')
     # activities_successor es redundante y genera problemas 
     #activities_successor = models.ManyToManyField('self',null=True, blank=True)
     roles = models.ManyToManyField(Role)

@@ -1,5 +1,6 @@
 from django import forms
 from django.forms.models import ModelForm
+from django.contrib.admin.widgets import AdminDateWidget
 from activity.models import *
 
 class TechniqueForm(ModelForm):
@@ -30,7 +31,14 @@ class update_artifactForm(forms.Form):
 class ActivityCreateForm(ModelForm):
     class Meta:
         model = Activity
-        fields = ('name', 'description', 'progress', 'date_start', 'date_end', 'project', 'users', 'activities_required', 'activities_super', 'roles', 'software_process', 'techniques')
+        fields = ('name', 'description', 'progress','date_start', 'date_end', 'project', 'users', 'activities_required', 'activities_super', 'roles', 'software_process', 'techniques')
+	widgets = {
+		'date_end' : AdminDateWidget,
+		'date_start' : AdminDateWidget,
+	}
+	
+
+        
 
         
 class ActivityUpdateForm(ModelForm):

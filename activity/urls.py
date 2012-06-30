@@ -35,12 +35,22 @@ urlpatterns = patterns('',
     #Manage Artifact
    # url(r'^manage_artifact/$', 'activity.views.manage_artifact'),
     #Create Artifact
+
+    # url(r'^project/(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
+    # Read Artifact
+    # url(r'^read_artifact/(?P<artifact_id>\d+)/$', 'activity.views.read_artifact'),
+    # Read Artifact
+    # url(r'^update_artifact/(?P<artifact_id>\d+)/$', 'activity.views.update_artifact'),
+    #Delete Artifact
+   # url(r'^delete_artifact/$', 'activity.views.delete_artifact'),
+
     url(r'^project/(?P<project_id>\d+)/create_artifact$', 'activity.views.create_artifact'),
     # Read Artifact YA SE LISTAN POR ACTIVIDAD
     url(r'^read_artifact/(?P<activity_id>\d+)/$', 'activity.views.read_artifact'), 
     # Update Artifact
     url(r'^update_artifact/(?P<artifact_id>\d+)/$', 'activity.views.update_artifact'),
     url(r'^update_artifact/(?P<artifact_id>\d+)/update_artifact$', 'activity.views.update_artifact'), 
+
     # Open Artifact
     url(r'^open_artifact/(?P<artifact_id>\d+)$', 'activity.views.open_artifact'),
    
