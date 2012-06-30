@@ -5,9 +5,18 @@
 
 
 <form action="/project/manage_participants/{{ project_id }}/{% if next %}?next={{ next }}{% endif %}" method="POST" >
+    {% csrf_token %}
     <h1>Agregar Participante y Membresia</h1>
-    Proyecto: {{form.project =  }}
-	
+    Proyecto:  project_id
+    <br/>
+    Participante: {{form.user}}
+    <br/>
+    Rol: {{form.role}}
+    <br/>    
+    Fecha de Suscripcion: {{form.date_joined}}
+    <br/>
+    Activo: {{form.enabled}}
+    <br/>	
 	<input type="submit" value="Guardar" />
 </form>
 

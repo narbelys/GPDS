@@ -124,7 +124,7 @@ def add_participant_project(request,project_id):
         redirect_to = request.REQUEST.get('next', '')
 
     return render_to_response('project/add_participant_project.html',
-                              {'form':form, 'projects_obj':projects_obj,
+                              {'form':form,
                                'next':redirect_to,
                                'project_id':project_id},
                                  context_instance=RequestContext(request))    
