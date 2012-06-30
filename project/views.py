@@ -46,8 +46,7 @@ def create_project(request):
                                    context_instance=RequestContext(request))
     else:
         form = ProjectCreateForm(request.POST)
-        form2 = MembershipCreateForm(request.POST)
-        return render_to_response('project/create_project.html', {'form':form, 'form2':form2,}, context_instance=RequestContext(request))
+        return render_to_response('project/create_project.html', {'form':form,}, context_instance=RequestContext(request))
 
 @login_required
 def read_project(request,project_id):
