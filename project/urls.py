@@ -24,4 +24,5 @@ urlpatterns = patterns('',
     url(r'^quit_project/$', 'project.views.quit_project'),
     url(r'^manage_participants/(?P<project_id>\d+)/$','project.views.manage_participants'),
     url(r'^add_participant_project/(?P<project_id>\d+)/$','project.views.add_participant_project'),
+    url(r'^listar_rol/$','project.views.listar_rol'),
 )
