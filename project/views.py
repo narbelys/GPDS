@@ -1,7 +1,7 @@
 from django.template import Context, loader
 from project.models import Project 
 from activity.models import Activity
-from users.models import Membership
+from users.models import Membership, Role
 from methodology.models import Methodology, SoftwareProcess
 from django.contrib.auth.models import User
 from django.http import HttpResponse
