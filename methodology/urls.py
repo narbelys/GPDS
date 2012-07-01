@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^read_methodology/(?P<methodology_id>\d+)/$', 'methodology.views.read_methodology'),
     url(r'^update_methodology/(?P<methodology_id>\d+)/$', 'methodology.views.update_methodology'),
     url(r'^delete_methodology/(?P<methodology_id>\d+)/$', 'methodology.views.delete_methodology'),
+    url(r'^consultar_rol/$', 'methodology.views.consultar_rol'),
     
     # News URL's for Software Process
     url(r'^manage_softwareprocess/$', 'methodology.views.manage_softwareprocess'),
