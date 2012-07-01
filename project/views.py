@@ -126,5 +126,16 @@ def add_participant_project(request,project_id):
                               {'form':form,
                                'next':redirect_to,
                                'project_id':project_id},
-                                 context_instance=RequestContext(request))    
+                                 context_instance=RequestContext(request))  
+@login_required
+def listar_rol(request):
+    if request.method == 'POST':
+           return read_methodology(request, methodology_id=p.id)
+    else:
+       	Lista_Proyectos = Project.objects.all()
+        return render_to_response('project/listar_rol.html',
+				{
+        			'Lista_Proyectos': Lista_Proyectos,
+    				},
+                              context_instance=RequestContext(request))
 
