@@ -3,8 +3,12 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-    {% if latest_sw_list %}
         <h1>Consultar Rol</h1>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
        <style type="text/css">
 	.verticalaccordion>ul {
 	    margin: 0;
@@ -68,37 +72,30 @@
     	cursor:pointer;
 	}
         </style>
-
-        {% if error_message %}
-            <p><strong>{{ error_message }}</strong></p>
-        {% endif %}
-
-        <form action="/methodology/createacc/" method="post">
-            Nombre: <input type="text" name="name" id="name"/><br />
-            Descripción: <br />
-            <textarea name="descripcion" id="descripcion" cols="50" rows="5">Descripcion del rol</textarea><br/ >
-            <br />
-            <input type="submit" value="Consultar" />
-            <a href="/methodology/"> Cancelar </a>
-        </form>
+	{% if Lista_Roles %}
 
 	<div class="verticalaccordion">
 	<ul>
-		
+		{% for Role in Lista_Roles %}
 		<li>
-	        <h3>Descripcion del rol +</h3>
-			<div>AQUI VA LA DESCRIPCION DEL ROL</div>
+	        <h3>{{ Role.name }}</h3>
+			<div id="descripcion">{{ Role.description }}</div>
 		</li>
+		{% endfor %}
 	</ul>
 	</div>
+	<a href="/methodology/"> Cancelar </a>
+	{% else %}
+    		<p>No Hay roles definidos</p>
+	{% endif %}
 
-    {% else %}
-        <p>Primero debe crear un Proceso de Software.</p> 
-    {% endif %}
+
 {% else %}
         <p>Primero debe iniciar sesión</p>
 {% endif %}
 
 {% endblock %}
+         
+
          
 
