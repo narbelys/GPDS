@@ -7,6 +7,8 @@ from django.template import Context, loader, RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required, login_required, permission_required
+from users.models import Role, Membership
+from project.models import Project
 
 
 ###################################################################################################
@@ -108,19 +110,18 @@ def read_softwareprocess(request, softwareprocess_id):
 ###################################################################################################
 
 
-#Consultar rol
+@login_required
+def consultar_rol(request):
+    if request.method == 'POST':
+       	return read_methodology(request, methodology_id=p.id)
+    else:
+       	Lista_Roles = Role.objects.all()
+        return render_to_response('methodology/consultar_rol.html',
+				{
+        			'Lista_Roles': Lista_Roles,
+    				},
+                              context_instance=RequestContext(request))
 
-@login_required 
-def consultarRol(request, methodology_id):
-    return render_to_response('methodology/consultarRol.html')
-
-#Listar roles del participante
-
-@login_required 
-def ListarRol(request, methodology_id):
-    return render_to_response('methodology/ListarRol.html')
-    
-    
         
 
 
